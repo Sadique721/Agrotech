@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Logged Out | AgroTech Solutions{% endblock %}
+
+{% block hero %}
+<div class="hero-content">
+    <h1>See You Soon!</h1>
+    <p>You have been safely logged out of AgroTech.</p>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .logout-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 20px;
+    }
+    .logout-box {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        width: 100%;
+        max-width: 420px;
+    }
+    .logout-box h2 {
+        margin-bottom: 15px;
+        color: #2d6a4f;
+        font-size: 1.8rem;
+    }
+    .logout-box p {
+        margin: 10px 0;
+        color: #555;
+    }
+    .logout-box .btn-group {
+        margin-top: 25px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .logout-box a.btn-primary {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #4CAF50;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    .logout-box a.btn-primary:hover {
+        background: #388E3C;
+    }
+    .logout-box a.btn-secondary {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #6c757d;
+        color: white;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: background 0.3s;
+    }
+    .logout-box a.btn-secondary:hover {
+        background: #495057;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- FIX: Now properly extends base.html with navbar and footer -->
+<div class="logout-container">
+    <div class="logout-box">
+        <h2>✅ Logged Out Successfully</h2>
+        <p>Thank you for using AgroTech. See you again soon!</p>
+        <div class="btn-group">
+            <a href="{% url 'login' %}" class="btn-primary">Login Again</a>
+            <a href="{% url 'home' %}" class="btn-secondary">Return to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

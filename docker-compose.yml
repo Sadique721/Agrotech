@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: agrotech_db
+    restart: always
+    environment:
+      POSTGRES_DB: agrotech
+      POSTGRES_USER: agrotech
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-agrotech_secure_pass}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: agrotech_app
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=False
+      - PORT=8000
+      - DATABASE_URL=postgres://agrotech:${POSTGRES_PASSWORD:-agrotech_secure_pass}@db:5432/agrotech
+      - SECRET_KEY=${SECRET_KEY:-4wTz_7qxv5hJdCOxYuEeTFTGsoO89h-PlFSSf5Z5peU1855dSHRVLBFBNatkS4dd7Vg}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
+    depends_on:
+      - db
+    volumes:
+      - ./media:/app/media
+
+volumes:
+  postgres_data:
+

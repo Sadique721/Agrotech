@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - AgroTech{% endblock %}
+
+{% block hero %}
+<div class="hero-content">
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you. Reach out with your questions or feedback.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="contact-section">
+    <div class="contact-container">
+        <div class="contact-form-wrapper">
+            <h2>Send Us a Message</h2>
+
+            <!-- FIX: Added messages display block -->
+            {% if messages %}
+            <div class="form-messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <form method="POST" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="msg" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send Message</button>
+            </form>
+        </div>
+
+        <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>📧 support@agrotech.com</p>
+            <p>📞 {{ AGROTECH_HELPLINE }}</p>
+            <p>📍 AgroTech Innovations, Main Market Road, Begusarai, Bihar - 851101, India</p>
+            <div class="contact-hours">
+                <h4>Business Hours</h4>
+                <p>Mon - Fri: 9:00 AM - 6:00 PM IST</p>
+                <p>Sat: 10:00 AM - 4:00 PM IST</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-section {
+        padding: 60px 20px;
+        background-color: #f9f9f9;
+    }
+    .contact-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 1000px;
+        margin: 0 auto;
+        gap: 40px;
+    }
+    .contact-form-wrapper {
+        flex: 1;
+        min-width: 300px;
+    }
+    .contact-form-wrapper h2 {
+        color: #2d6a4f;
+        margin-bottom: 20px;
+        font-size: 1.6rem;
+    }
+    .form-messages {
+        margin-bottom: 15px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #444;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        transition: border-color 0.3s;
+        box-sizing: border-box;
+    }
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+    .btn-primary {
+        background-color: #28a745;
+        color: #fff;
+        padding: 12px 28px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+    .btn-primary:hover {
+        background-color: #218838;
+    }
+    .contact-info {
+        flex: 1;
+        min-width: 250px;
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    .contact-info h3 {
+        color: #2d6a4f;
+        margin-bottom: 15px;
+        font-size: 1.4rem;
+    }
+    .contact-info p {
+        margin-bottom: 10px;
+        color: #555;
+    }
+    .contact-hours {
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+    }
+    .contact-hours h4 {
+        color: #2d6a4f;
+        margin-bottom: 8px;
+    }
+    @media (max-width: 768px) {
+        .contact-container {
+            flex-direction: column;
+        }
+    }
+</style>
+{% endblock %}

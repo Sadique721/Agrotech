@@ -1,0 +1,510 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Agri Legends & Pioneers - AgroTech{% endblock %}
+
+{% block hero %}
+<div class="legends-hero">
+    <div class="hero-content text-center">
+        <span class="hero-badge">🏆 Hall of Fame & Scientific Visionaries</span>
+        <h1>World-Renowned Agriculture Pioneers & Leaders</h1>
+        <p>Honoring the visionary scientists, innovators, and leaders who transformed global food security and sustainable agronomy.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="legends-page-wrapper">
+
+    <!-- SECTION 1: FOUNDER & LEAD VISIONARY (USER DETAILS FIRST) -->
+    <section class="founder-section mt-4">
+        <div class="section-title text-center mb-4">
+            <span class="sub-badge gold">🌟 Founder & Lead AgriTech Architect</span>
+            <h2>Platform Creator & Bihar AgriTech Pioneer</h2>
+        </div>
+
+        <div class="founder-card">
+            <div class="founder-header">
+                <div class="founder-img-ring">
+                    {% if profile.profile_picture %}
+                        <img src="{{ profile.profile_picture.url }}" alt="Md Sadique Amin" class="founder-img">
+                    {% else %}
+                        <img src="{% static 'CEO.webp' %}" alt="Md Sadique Amin" class="founder-img">
+                    {% endif %}
+                </div>
+                <div class="founder-title-info">
+                    <div class="title-row">
+                        <h1>Md Sadique Amin</h1>
+                        <span class="badge-tag gold">★ Founder & Chief Architect</span>
+                    </div>
+                    <p class="location-tag">📍 Begusarai, Bihar, India • AgroTech Innovations</p>
+                    <div class="tags-flex mt-2">
+                        <span class="pill-tag">🤖 AI Agronomy Specialist</span>
+                        <span class="pill-tag">🌤️ Real-Time Weather Pioneer</span>
+                        <span class="pill-tag">📡 IoT Drip Systems Developer</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="founder-body mt-4">
+                <h3>📖 Biography & Major Contributions</h3>
+                <p>Operating from Begusarai, Bihar, <strong>Md Sadique Amin</strong> is a pioneering agricultural software architect and innovator dedicated to empowering India's 150 million smallholder farmers. Recognizing the critical challenge of climate volatility and water scarcity, he architected the end-to-end <strong>AgroTech Smart Platform</strong>.</p>
+
+                <div class="founder-highlights-grid mt-4">
+                    <div class="highlight-box">
+                        <span class="hl-icon">🌤️</span>
+                        <h4>All-India Weather Engine</h4>
+                        <p>Integrated Open-Meteo live satellite APIs providing 100% real-time 7-day weather forecasts & crop advisories for every state in India.</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <span class="hl-icon">🧠</span>
+                        <h4>AI Crop Diagnostics</h4>
+                        <p>Developed deep-learning vision models for early detection of fungal rust, pest infestations, and leaf nutrient deficiencies.</p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <span class="hl-icon">💰</span>
+                        <h4>Bihar Market Linkage</h4>
+                        <p>Established direct wholesale market networks connecting paddy and vegetable farmers in Begusarai & Bihar with national buyers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: FAMOUS INDIAN AGRICULTURE PIONEERS & SCIENTISTS (WITH REAL PHOTOS) -->
+    <section class="indian-legends-section mt-5">
+        <div class="section-title text-center mb-4">
+            <span class="sub-badge green">🇮🇳 Indian Agriculture Legends</span>
+            <h2>Visionaries Who Transformed Indian Agriculture</h2>
+            <p>Scientists and leaders who secured food independence and made India a global agricultural powerhouse.</p>
+        </div>
+
+        <div class="legends-grid">
+            <!-- Indian Legend 1: Dr. M.S. Swaminathan -->
+            <div class="legend-card">
+                <div class="card-top-tag green">Green Revolution Leader</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/ms_swaminathan.jpg' %}" alt="Dr. M.S. Swaminathan">
+                </div>
+                <h3>Dr. M.S. Swaminathan</h3>
+                <span class="legend-dates">1925 – 2023 • India</span>
+                <p class="legend-role">Father of India's Green Revolution</p>
+
+                <div class="bio-snippet">
+                    <p>Renowned plant geneticist who collaborated with Dr. Norman Borlaug to introduce high-yielding wheat and rice dwarf varieties in India during the 1960s, turning India from a food-deficient nation into a self-sufficient agricultural exporter.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> Bharat Ratna (2024), World Food Prize First Recipient (1987), Padma Vibhushan.
+                </div>
+            </div>
+
+            <!-- Indian Legend 2: Dr. Verghese Kurien -->
+            <div class="legend-card">
+                <div class="card-top-tag green">White Revolution Pioneer</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/verghese_kurien.jpg' %}" alt="Dr. Verghese Kurien">
+                </div>
+                <h3>Dr. Verghese Kurien</h3>
+                <span class="legend-dates">1921 – 2012 • India</span>
+                <p class="legend-role">Father of the White Revolution (Operation Flood)</p>
+
+                <div class="bio-snippet">
+                    <p>Social entrepreneur who engineered Operation Flood—the world's largest agricultural dairy development program. He created the Amul cooperative model, empowering millions of small dairy farmers across India.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> World Food Prize (1989), Ramon Magsaysay Award, Padma Vibhushan.
+                </div>
+            </div>
+
+            <!-- Indian Legend 3: Dr. Gurdev Khush -->
+            <div class="legend-card">
+                <div class="card-top-tag green">Rice Genetics Legend</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/gurdev_khush.jpg' %}" alt="Dr. Gurdev Khush">
+                </div>
+                <h3>Dr. Gurdev Khush</h3>
+                <span class="legend-dates">1935 – Present • Punjab, India</span>
+                <p class="legend-role">World-Renowned Rice Geneticist</p>
+
+                <div class="bio-snippet">
+                    <p>Led plant breeding at the International Rice Research Institute (IRRI). He developed IR36 and IR64 high-yielding, pest-resistant rice strains grown on over 60% of Asia's rice fields, feeding billions.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> World Food Prize (1996), Wolf Prize in Agriculture, Japan Prize.
+                </div>
+            </div>
+
+            <!-- Indian Legend 4: Dr. Subhash Palekar -->
+            <div class="legend-card">
+                <div class="card-top-tag green">Natural Farming Visionary</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/subhash_palekar.jpg' %}" alt="Dr. Subhash Palekar">
+                </div>
+                <h3>Dr. Subhash Palekar</h3>
+                <span class="legend-dates">1949 – Present • Maharashtra, India</span>
+                <p class="legend-role">Creator of Zero Budget Natural Farming (ZBNF)</p>
+
+                <div class="bio-snippet">
+                    <p>Practicing agronomist who developed Zero Budget Natural Farming methods utilizing indigenous bio-enhancers (Jeevamrut) and soil mulching to eliminate farmer dependence on chemical fertilizers.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> Padma Shri (2016), National Krishi Ratna.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: INTERNATIONAL GLOBAL AGRICULTURE VISIONARIES (WITH REAL PHOTOS) -->
+    <section class="global-legends-section mt-5 mb-5">
+        <div class="section-title text-center mb-4">
+            <span class="sub-badge blue">🌍 Global & International Champions</span>
+            <h2>International Pioneers Who Changed World Agriculture</h2>
+            <p>Nobel laureates, chemists, and geneticists whose scientific breakthroughs shaped modern global agronomy.</p>
+        </div>
+
+        <div class="legends-grid">
+            <!-- Global Legend 1: Dr. Norman Borlaug -->
+            <div class="legend-card">
+                <div class="card-top-tag blue">Nobel Peace Laureate</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/norman_borlaug.jpg' %}" alt="Dr. Norman Borlaug">
+                </div>
+                <h3>Dr. Norman Borlaug</h3>
+                <span class="legend-dates">1914 – 2009 • USA / Global</span>
+                <p class="legend-role">Father of the Global Green Revolution</p>
+
+                <div class="bio-snippet">
+                    <p>American agronomist whose semi-dwarf, disease-resistant, high-yield wheat strains saved over 1 billion people worldwide from starvation across Mexico, India, and Pakistan during the 20th century.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> Nobel Peace Prize (1970), Presidential Medal of Freedom, Congressional Gold Medal.
+                </div>
+            </div>
+
+            <!-- Global Legend 2: George Washington Carver -->
+            <div class="legend-card">
+                <div class="card-top-tag blue">Crop Rotation Pioneer</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/george_carver.jpg' %}" alt="George Washington Carver">
+                </div>
+                <h3>George Washington Carver</h3>
+                <span class="legend-dates">1864 – 1943 • USA</span>
+                <p class="legend-role">Pioneer in Agricultural Chemistry & Soil Health</p>
+
+                <div class="bio-snippet">
+                    <p>Promoted nitrogen-fixing crop rotation methods using peanuts and sweet potatoes to restore cotton-depleted soils, developing hundreds of commercial peanut products to empower poor southern farmers.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> Spingarn Medal, National Inventors Hall of Fame.
+                </div>
+            </div>
+
+            <!-- Global Legend 3: Gregor Mendel -->
+            <div class="legend-card">
+                <div class="card-top-tag blue">Father of Genetics</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/gregor_mendel.jpg' %}" alt="Gregor Mendel">
+                </div>
+                <h3>Gregor Mendel</h3>
+                <span class="legend-dates">1822 – 1884 • Austria</span>
+                <p class="legend-role">Discoverer of Laws of Genetic Inheritance</p>
+
+                <div class="bio-snippet">
+                    <p>Through meticulous pea plant hybridization experiments, Mendel discovered dominant and recessive genetic inheritance laws, forming the foundational science behind all modern plant and crop breeding.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> Father of Modern Genetics.
+                </div>
+            </div>
+
+            <!-- Global Legend 4: Justus von Liebig -->
+            <div class="legend-card">
+                <div class="card-top-tag blue">Fertilizer Chemistry Creator</div>
+                <div class="legend-img-wrap">
+                    <img src="{% static 'legends/justus_liebig.jpg' %}" alt="Justus von Liebig">
+                </div>
+                <h3>Justus von Liebig</h3>
+                <span class="legend-dates">1803 – 1873 • Germany</span>
+                <p class="legend-role">Father of the Agricultural Fertilizer Industry</p>
+
+                <div class="bio-snippet">
+                    <p>Formulated the Law of the Minimum in agricultural science, establishing that nitrogen, phosphorus, and potassium (NPK) are essential plant nutrients, giving birth to modern mineral fertilization.</p>
+                </div>
+
+                <div class="honors-box">
+                    <strong>🏅 Honors:</strong> Grand Cross of the Order of Merit.
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .legends-hero {
+        background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+        color: white;
+        padding: 70px 20px;
+        text-align: center;
+    }
+
+    .hero-badge {
+        background: rgba(255, 215, 0, 0.2);
+        color: #ffd700;
+        border: 1px solid #ffd700;
+        padding: 6px 18px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .legends-page-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px 60px;
+    }
+
+    .sub-badge.gold { background: #fef9c3; color: #a16207; }
+    .sub-badge.green { background: #e8f5e9; color: #2e7d32; }
+    .sub-badge.blue { background: #e0f2fe; color: #0284c7; }
+
+    .sub-badge {
+        padding: 5px 14px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    /* Founder Section Styling */
+    .founder-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border: 3px solid #ffd700;
+        position: relative;
+    }
+
+    .founder-header {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        flex-wrap: wrap;
+    }
+
+    .founder-img-ring {
+        width: 130px;
+        height: 130px;
+        border-radius: 50%;
+        border: 4px solid #ffd700;
+        background: #e8f5e9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+
+    .founder-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .title-row {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .title-row h1 {
+        font-size: 2.2rem;
+        color: #1b4332;
+        margin: 0;
+    }
+
+    .badge-tag.gold {
+        background: #fef9c3;
+        color: #a16207;
+        border: 1px solid #eab308;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    .location-tag {
+        color: #555;
+        font-size: 1.1rem;
+        margin-top: 5px;
+
+    }
+
+    .tags-flex {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .pill-tag {
+        background: #e8f5e9;
+        color: #2d6a4f;
+        padding: 4px 12px;
+        border-radius: 15px;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    .founder-body h3 {
+        color: #1b4332;
+        margin-bottom: 12px;
+        font-size: 1.4rem;
+        text-align: left;
+    }
+
+    .founder-body p {
+        color: #444;
+        line-height: 1.7;
+        font-size: 1.05rem;
+    }
+
+    .founder-highlights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+    }
+
+    .highlight-box {
+        background: #f8fcf9;
+        padding: 20px;
+        border-radius: 14px;
+        border: 1px solid #d8f3dc;
+    }
+
+    .hl-icon { font-size: 32px; display: block; margin-bottom: 10px; }
+
+    .highlight-box h4 {
+        color: #1b4332;
+        margin-bottom: 6px;
+        text-align: left;
+
+    }
+
+    .highlight-box p {
+        font-size: 0.9rem;
+        color: #666;
+        margin: 0;
+    }
+
+    /* Legends Grid */
+    .legends-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+    }
+
+    .legend-card {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        border: 1px solid #e9ecef;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .legend-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+    }
+
+    .card-top-tag {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 12px;
+    }
+
+    .card-top-tag.green { background: #e8f5e9; color: #2e7d32; }
+    .card-top-tag.blue { background: #e0f2fe; color: #0284c7; }
+
+    .legend-img-wrap {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        background: #f4faf6;
+    }
+
+    .legend-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top center;
+        transition: transform 0.4s;
+    }
+
+    .legend-card:hover .legend-img-wrap img {
+        transform: scale(1.06);
+    }
+
+    .legend-card h3 {
+        color: #1b4332;
+        margin-bottom: 4px;
+        font-size: 1.3rem;
+    }
+
+    .legend-dates {
+        font-size: 0.8rem;
+        color: #888;
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    .legend-role {
+        color: #2d6a4f;
+        font-weight: bold;
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+    }
+
+    .bio-snippet p {
+        font-size: 0.88rem;
+        color: #555;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .honors-box {
+        background: #f8f9fa;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        color: #444;
+        border-left: 3px solid #52b788;
+    }
+</style>
+{% endblock %}

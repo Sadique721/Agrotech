@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title %}Page Not Found | AgroTech{% endblock %}
+{% block content %}
+<div class="container" style="text-align:center; padding:100px 20px; min-height: 50vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1 style="font-size: 4rem; color: #2d6a4f; margin-bottom: 20px;">404</h1>
+    <h2 style="margin-bottom: 20px;">🌿 Oops! Page Not Found</h2>
+    <p style="color: #666; max-width: 500px; margin-bottom: 30px;">The resource you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+    <a href="{% url 'home' %}" style="display: inline-block; padding: 12px 30px; background-color: #2d6a4f; color: white; text-decoration: none; border-radius: 25px; font-weight: bold; transition: background 0.3s ease;">Go Back Home</a>
+</div>
+{% endblock %}

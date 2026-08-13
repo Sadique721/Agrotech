@@ -1,0 +1,562 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Our Services - AgroTech{% endblock %}
+
+{% block hero %}
+<div class="hero-content">
+    <h1>🌱 AgroTech Solutions & Services</h1>
+    <p>Innovative solutions for modern agriculture.</p>
+</div>
+{% endblock %}
+
+{% block content %}
+<section class="services-section">
+    <div class="services-container">
+
+        <!-- Category Filter Bar -->
+        <div class="filter-bar">
+            <button class="filter-pill active" onclick="filterServices('all', this)">All Services (16)</button>
+            <button class="filter-pill" onclick="filterServices('tech', this)">🤖 Smart Tech & IoT</button>
+            <button class="filter-pill" onclick="filterServices('crop', this)">🌾 Crop Care & Protection</button>
+            <button class="filter-pill" onclick="filterServices('finance', this)">💰 Finance & Market</button>
+        </div>
+
+        <!-- Service Cards Grid -->
+        <div class="service-cards">
+            <!-- Card 1 -->
+            <div class="card" data-category="tech" data-title="Smart Irrigation" data-desc="Automate water management to maximize crop yield, optimize soil hydration, and save precious water resources." data-img="{% static 'ic.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'ic.webp' %}" alt="Smart Irrigation">
+                    <span class="category-badge tech">IoT Tech</span>
+                </div>
+                <h3>Smart Irrigation</h3>
+                <p>Automate water management to maximize crop yield and save resources.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card" data-category="crop" data-title="Soil Monitoring" data-desc="Analyze soil conditions in real-time for precision farming with IoT sensor networks." data-img="{% static 'sm.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'sm.webp' %}" alt="Soil Monitoring">
+                    <span class="category-badge crop">Soil & Crop</span>
+                </div>
+                <h3>Soil Monitoring</h3>
+                <p>Analyze soil conditions in real-time for precision farming.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card" data-category="tech" data-title="Weather Forecasting" data-desc="Receive accurate hyper-local weather updates and alerts to plan agricultural activities effectively." data-img="{% static 'wc.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'wc.webp' %}" alt="Weather Forecasting">
+                    <span class="category-badge tech">Live Weather</span>
+                </div>
+                <h3>Weather Forecasting</h3>
+                <p>Receive accurate weather updates to plan agricultural activities effectively.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card" data-category="tech" data-title="Drone Surveillance" data-desc="Monitor crops and detect growth or health issues early with aerial thermal imaging." data-img="{% static 'ds.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'ds.webp' %}" alt="Drone Surveillance">
+                    <span class="category-badge tech">Drone Tech</span>
+                </div>
+                <h3>Drone Surveillance</h3>
+                <p>Monitor crops and detect issues early with aerial imaging technology.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="card" data-category="crop" data-title="Crop Health Analysis" data-desc="Use advanced sensors and AI computer vision to monitor crop health and detect diseases early." data-img="{% static 'CHA.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'CHA.webp' %}" alt="Crop Health Analysis">
+                    <span class="category-badge crop">AI Disease Alert</span>
+                </div>
+                <h3>Crop Health Analysis</h3>
+                <p>Use advanced sensors and AI to monitor crop health and detect diseases early.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="card" data-category="crop" data-title="Pest Control Solutions" data-desc="Eco-friendly integrated pest management to protect your crops and increase overall harvest yield." data-img="{% static 'PCS.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'PCS.webp' %}" alt="Pest Control Solutions">
+                    <span class="category-badge crop">Eco Care</span>
+                </div>
+                <h3>Pest Control Solutions</h3>
+                <p>Eco-friendly pest management to protect your crops and increase yield.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="card" data-category="tech" data-title="Farm Management Software" data-desc="Streamline farm operations, worker tasks, inventory, and finances with our comprehensive management software." data-img="{% static 'FMS.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'FMS.webp' %}" alt="Farm Management Software">
+                    <span class="category-badge tech">Software</span>
+                </div>
+                <h3>Farm Management Software</h3>
+                <p>Streamline farm operations with our comprehensive management tools.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="card" data-category="crop" data-title="Precision Planting" data-desc="Optimize seed placement, depth, and spacing for better crop growth and maximum yield." data-img="{% static 'PP.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'PP.webp' %}" alt="Precision Planting">
+                    <span class="category-badge crop">Precision Agri</span>
+                </div>
+                <h3>Precision Planting</h3>
+                <p>Optimize seed placement and spacing for better crop growth and yield.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 9 -->
+            <div class="card" data-category="tech" data-title="Livestock Monitoring" data-desc="Track livestock health, location, and behavior with IoT-enabled smart collars and devices." data-img="{% static 'LM.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'LM.webp' %}" alt="Livestock Monitoring">
+                    <span class="category-badge tech">IoT Livestock</span>
+                </div>
+                <h3>Livestock Monitoring</h3>
+                <p>Track livestock health and behavior with IoT-enabled devices.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 10 -->
+            <div class="card" data-category="tech" data-title="Greenhouse Automation" data-desc="Control temperature, humidity, CO2 levels, and lighting for optimal greenhouse crop conditions." data-img="{% static 'GA.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'GA.webp' %}" alt="Greenhouse Automation">
+                    <span class="category-badge tech">Automation</span>
+                </div>
+                <h3>Greenhouse Automation</h3>
+                <p>Control temperature, humidity, and lighting for optimal greenhouse conditions.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 11 -->
+            <div class="card" data-category="finance" data-title="Supply Chain Management" data-desc="Efficiently manage the flow of agricultural products from farm gate directly to market hubs." data-img="{% static 'SCM.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'SCM.webp' %}" alt="Supply Chain Management">
+                    <span class="category-badge finance">Logistics</span>
+                </div>
+                <h3>Supply Chain Management</h3>
+                <p>Efficiently manage the flow of agricultural products from farm to market.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 12 -->
+            <div class="card" data-category="finance" data-title="Agri-Financial Services" data-desc="Access low-interest loans, crop insurance, and financial planning tailored for modern farmers." data-img="{% static 'AFS.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'AFS.webp' %}" alt="Agri-Financial Services">
+                    <span class="category-badge finance">Loans & Insurance</span>
+                </div>
+                <h3>Agri-Financial Services</h3>
+                <p>Access loans, insurance, and financial planning tailored for farmers.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 13 -->
+            <div class="card" data-category="crop" data-title="Training & Workshops" data-desc="Learn modern farming techniques and technologies through our expert-led agricultural programs." data-img="{% static 'TW.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'TW.webp' %}" alt="Training & Workshops">
+                    <span class="category-badge crop">Training</span>
+                </div>
+                <h3>Training & Workshops</h3>
+                <p>Learn modern farming techniques and technologies through our expert-led programs.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 14 -->
+            <div class="card" data-category="finance" data-title="Market Linkage" data-desc="Connect directly with verified buyers and wholesale markets to get the best prices for your produce." data-img="{% static 'ML.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'ML.webp' %}" alt="Market Linkage">
+                    <span class="category-badge finance">Direct Market</span>
+                </div>
+                <h3>Market Linkage</h3>
+                <p>Connect directly with buyers and markets to get the best prices for your produce.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 15 -->
+            <div class="card" data-category="tech" data-title="Hydroponics Solutions" data-desc="Grow high-value crops without soil using advanced hydroponic nutrient systems for maximum efficiency." data-img="{% static 'HS.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'HS.webp' %}" alt="Hydroponics Solutions">
+                    <span class="category-badge tech">Hydroponics</span>
+                </div>
+                <h3>Hydroponics Solutions</h3>
+                <p>Grow crops without soil using advanced hydroponic systems for higher efficiency.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+
+            <!-- Card 16 -->
+            <div class="card" data-category="tech" data-title="Agri-Drone Spraying" data-desc="Use precision agricultural drones for fast, uniform spraying of fertilizers and eco-pesticides." data-img="{% static 'ADS.webp' %}" onclick="openModalFromCard(this)">
+                <div class="card-img-wrap">
+                    <img src="{% static 'ADS.webp' %}" alt="Agri-Drone Spraying">
+                    <span class="category-badge tech">Drone Spraying</span>
+                </div>
+                <h3>Agri-Drone Spraying</h3>
+                <p>Use drones for precise and efficient spraying of fertilizers and pesticides.</p>
+                <button class="btn-card-action">Learn More & Book →</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- Service Interactive Booking Modal Popup -->
+<div id="serviceModal" class="modal-overlay" onclick="closeModal(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModalForce()">&times;</button>
+        <img id="modalImg" src="" alt="Service Image" class="modal-img">
+        <h2 id="modalTitle" class="modal-title">Service Title</h2>
+        <p id="modalDesc" class="modal-desc">Service Detailed description goes here...</p>
+
+        <div class="modal-booking-box">
+            <h3>⚡ Request Callback & Instant Booking</h3>
+            <form id="ajaxBookingForm" method="POST" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <input type="hidden" name="msg" id="modalServiceMsg" value="Service Request">
+                <div class="modal-form-grid">
+                    <input type="text" name="name" placeholder="Your Name" value="{% if user.is_authenticated %}{{ user.first_name|default:user.username }}{% endif %}" required>
+                    <input type="email" name="email" placeholder="Your Email" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" required>
+                </div>
+                <button type="submit" id="btnSubmitBooking" class="btn-submit-booking">Request Service Callback</button>
+                <div id="bookingStatus" style="margin-top: 12px; padding: 10px; border-radius: 6px; font-weight: bold; text-align: center; display: none;"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .services-section {
+        padding: 50px 20px 80px;
+        background-color: #f4faf6;
+    }
+
+    .services-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+    }
+
+    .filter-pill {
+        background: white;
+        border: 2px solid #52b788;
+        color: #1b4332;
+        padding: 10px 22px;
+        border-radius: 25px;
+        font-weight: bold;
+        font-size: 0.95rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .filter-pill:hover, .filter-pill.active {
+        background: #2d6a4f;
+        color: white;
+        border-color: #2d6a4f;
+        box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);
+    }
+
+    /* Cards Grid */
+    .service-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 25px;
+    }
+
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.07);
+        text-align: center;
+        border-radius: 14px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid #e9ecef;
+    }
+
+    .card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+        border-color: #52b788;
+    }
+
+    .card-img-wrap {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .card img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+        transition: transform 0.4s ease;
+    }
+
+    .card:hover img {
+        transform: scale(1.06);
+    }
+
+    .category-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: bold;
+        color: white;
+    }
+
+    .category-badge.tech { background-color: #0077b6; }
+    .category-badge.crop { background-color: #2e7d32; }
+    .category-badge.finance { background-color: #d97706; }
+
+    .card h3 {
+        color: #1b4332;
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+    }
+
+    .card p {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    .btn-card-action {
+        background-color: #e8f5e9;
+        color: #2d6a4f;
+        border: 1px solid #b7e4c7;
+        padding: 10px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        width: 100%;
+    }
+
+    .card:hover .btn-card-action {
+        background-color: #2d6a4f;
+        color: white;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(5px);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    }
+
+    .modal-box {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        max-width: 550px;
+        width: 100%;
+        position: relative;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        animation: popUp 0.3s ease;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: #f0f0f0;
+        border: none;
+        font-size: 1.8rem;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        color: #333;
+    }
+
+    .modal-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .modal-title {
+        color: #1b4332;
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+
+    .modal-desc {
+        color: #555;
+        line-height: 1.6;
+        margin-bottom: 20px;
+    }
+
+    .modal-booking-box {
+        background: #f4fbf7;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #d8f3dc;
+    }
+
+    .modal-booking-box h3 {
+        color: #2d6a4f;
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+    }
+
+    .modal-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-bottom: 12px;
+    }
+
+    .modal-form-grid input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 0.9rem;
+    }
+
+    .btn-submit-booking {
+        width: 100%;
+        padding: 12px;
+        background-color: #2d6a4f;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .btn-submit-booking:hover {
+        background-color: #1b4332;
+    }
+
+    @keyframes popUp {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function filterServices(category, btnElement) {
+        const pills = document.querySelectorAll('.filter-pill');
+        pills.forEach(p => p.classList.remove('active'));
+        btnElement.classList.add('active');
+
+        const cards = document.querySelectorAll('.service-cards .card');
+        cards.forEach(card => {
+            if (category === 'all' || card.getAttribute('data-category') === category) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+
+    function openModalFromCard(cardElement) {
+        const title = cardElement.getAttribute('data-title');
+        const desc = cardElement.getAttribute('data-desc');
+        const imgSrc = cardElement.getAttribute('data-img');
+
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalDesc').innerText = desc;
+        document.getElementById('modalImg').src = imgSrc;
+        document.getElementById('modalServiceMsg').value = 'Service Request for: ' + title;
+        document.getElementById('serviceModal').style.display = 'flex';
+    }
+
+    function closeModal(event) {
+        if (event.target.classList.contains('modal-overlay')) {
+            document.getElementById('serviceModal').style.display = 'none';
+        }
+    }
+
+    function closeModalForce() {
+        document.getElementById('serviceModal').style.display = 'none';
+        // Reset status for next open
+        const statusDiv = document.getElementById('bookingStatus');
+        statusDiv.style.display = 'none';
+        statusDiv.innerText = '';
+    }
+
+    document.getElementById('ajaxBookingForm').addEventListener('submit', function (event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = new FormData(form);
+        const statusDiv = document.getElementById('bookingStatus');
+        const submitBtn = document.getElementById('btnSubmitBooking');
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = 'Submitting Request...';
+        statusDiv.style.display = 'block';
+        statusDiv.style.backgroundColor = '#e1f5fe';
+        statusDiv.style.color = '#0288d1';
+        statusDiv.innerText = 'Processing your booking request...';
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => {
+            if (response.ok || response.status === 302 || response.redirected) {
+                statusDiv.style.backgroundColor = '#d4edda';
+                statusDiv.style.color = '#155724';
+                statusDiv.innerText = 'Success! Our support team will contact you shortly.';
+                form.reset();
+                setTimeout(closeModalForce, 2500);
+            } else {
+                throw new Error('Server returned error status');
+            }
+        })
+        .catch(error => {
+            statusDiv.style.backgroundColor = '#f8d7da';
+            statusDiv.style.color = '#721c24';
+            statusDiv.innerText = 'An error occurred. Please try again.';
+        })
+        .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.innerText = 'Request Service Callback';
+        });
+    });
+</script>
+{% endblock %}

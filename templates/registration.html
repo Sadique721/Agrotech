@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Register - AgroTech Solutions{% endblock %}
+
+{% block hero %}
+<div class="hero-content">
+    <h1>Create Account</h1>
+    <p>Join AgroTech and start transforming your farming experience.</p>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .registration-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 20px;
+    }
+    .registration-form {
+        max-width: 450px;
+        width: 100%;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    .registration-form h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #2d6a4f;
+        font-size: 1.8rem;
+    }
+    .form-messages {
+        margin-bottom: 15px;
+    }
+    .registration-form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #444;
+    }
+    .registration-form input[type="text"],
+    .registration-form input[type="email"],
+    .registration-form input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+        box-sizing: border-box;
+    }
+    .registration-form input:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+    .registration-form input[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .registration-form input[type="submit"]:hover {
+        background-color: #388E3C;
+    }
+    .registration-form p {
+        text-align: center;
+        margin-top: 15px;
+        color: #555;
+    }
+    .registration-form p a {
+        color: #4CAF50;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .registration-form p a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="registration-container">
+    <section class="registration-form">
+        <h2>🌿 Register</h2>
+
+        <!-- FIX: Added messages display (was missing entirely) -->
+        {% if messages %}
+        <div class="form-messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'registration' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="password1">Password:</label>
+            <input type="password" id="password1" name="password1" required>
+
+            <label for="password2">Confirm Password:</label>
+            <input type="password" id="password2" name="password2" required>
+
+            <input type="submit" value="Create Account">
+        </form>
+        <!-- FIX: "Registeration" → "Registration" spelling corrected -->
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </section>
+</div>
+{% endblock %}

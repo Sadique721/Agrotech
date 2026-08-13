@@ -1,0 +1,495 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - AgroTech Innovations{% endblock %}
+
+{% block hero %}
+<div class="about-hero">
+    <div class="hero-content">
+        <span class="hero-badge">🌿 Empowering Indian Farmers Since 2020</span>
+        <h1>Revolutionizing Agriculture Through Intelligence</h1>
+        <p>Combining AI, IoT Sensors, Drone Surveillance, and Real-Time Weather Data for Sustainable Farming.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="about-page-wrapper">
+
+    <!-- IMPACT STATS COUNTER BAR -->
+    <section class="impact-stats-section">
+        <div class="stats-container">
+            <div class="impact-stat-item">
+                <span class="stat-number">150,000+</span>
+                <span class="stat-title">👨‍🌾 Farmers Empowered</span>
+            </div>
+            <div class="impact-stat-item">
+                <span class="stat-number">500,000+</span>
+                <span class="stat-title">🌾 Acres Digitized</span>
+            </div>
+            <div class="impact-stat-item">
+                <span class="stat-number">35%</span>
+                <span class="stat-title">💧 Water Conserved</span>
+            </div>
+            <div class="impact-stat-item">
+                <span class="stat-number">40%</span>
+                <span class="stat-title">📈 Average Yield Boost</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISSION & VISION SECTION -->
+    <section class="mission-vision-section mt-5">
+        <div class="section-heading text-center">
+            <h2>Who We Are & What Drives Us</h2>
+            <p>AgroTech is dedicated to modernizing farming practices across India with smart technological solutions.</p>
+        </div>
+
+        <div class="grid-2-col mt-4">
+            <div class="mission-card">
+                <div class="card-img-wrap">
+                    <img src="{% static 'om.webp' %}" alt="Our Mission">
+                </div>
+                <h3>🎯 Our Mission</h3>
+                <p>To equip every farmer with affordable, real-time data tools—from automated smart irrigation and live weather tracking to drone surveillance—ensuring maximum crop yields while preserving natural resources.</p>
+            </div>
+
+            <div class="mission-card">
+                <div class="card-img-wrap">
+                    <img src="{% static 'ov.webp' %}" alt="Our Vision">
+                </div>
+                <h3>🚀 Our Vision</h3>
+                <p>To build a climate-resilient, data-driven agricultural ecosystem where technology bridges the gap between traditional farming wisdom and modern sustainable food security.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE MILESTONES TIMELINE -->
+    <section class="timeline-section mt-5">
+        <div class="section-heading text-center">
+            <h2>📜 Our Journey & Innovation Milestones</h2>
+            <p>From humble beginnings in Patan, Gujarat to empowering farmers across India.</p>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="year-badge">2020</span>
+                    <h3>🌱 AgroTech Founded</h3>
+                    <p>Established with a vision to automate soil nutrient testing and smart drip irrigation systems for smallholder farmers.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="year-badge">2022</span>
+                    <h3>🤖 AI Disease Diagnostic Engine</h3>
+                    <p>Launched deep learning computer vision algorithms capable of detecting crop diseases from simple smartphone leaf photos.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <span class="year-badge">2024</span>
+                    <h3>🛸 Agri-Drone Spraying Fleet</h3>
+                    <p>Deployed precision agricultural spraying drones capable of treating 10 acres per hour with uniform bio-pesticide distribution.</p>
+                </div>
+            </div>
+
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <span class="year-badge">2026</span>
+                    <h3>🌤️ Live All-India Weather Portal</h3>
+                    <p>Integrated Open-Meteo real-time weather APIs to deliver instant 7-day forecasts & agri advisories across all Indian states.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CORE PILLARS & VALUES -->
+    <section class="pillars-section mt-5">
+        <div class="section-heading text-center">
+            <h2>💡 Our Core Guiding Pillars</h2>
+        </div>
+
+        <div class="pillars-grid mt-4">
+            <div class="pillar-card">
+                <div class="pillar-icon">🤖</div>
+                <h3>Technological Innovation</h3>
+                <p>Developing state-of-the-art IoT, AI, and aerial drone tools simplified for everyday agricultural operations.</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">🌿</div>
+                <h3>Environmental Sustainability</h3>
+                <p>Promoting eco-friendly pest management, soil conservation, and smart water management practices.</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">👨‍🌾</div>
+                <h3>Farmer First Commitment</h3>
+                <p>Designing intuitive, accessible multi-language interfaces that empower rural communities.</p>
+            </div>
+
+            <div class="pillar-card">
+                <div class="pillar-icon">🤝</div>
+                <h3>Trust & Integrity</h3>
+                <p>Providing transparent pricing, unbiased crop advice, and direct market linkage without middlemen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXECUTIVE LEADERSHIP TEAM -->
+    <section class="team-section mt-5 mb-5">
+        <div class="section-heading text-center">
+            <h2>👤 Meet the Founder & Lead Developer</h2>
+            <p>AgroTech is a solo development project conceptualized, designed, and coded from the ground up.</p>
+        </div>
+
+        <div class="team-grid mt-4" style="display: flex; justify-content: center; gap: 20px;">
+            <div class="team-card" style="max-width: 450px; margin: 0 auto; text-align: center; border: 2px solid #52b788; border-radius: 12px; padding: 25px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); background: white;">
+                <div class="team-img-wrap" style="width: 150px; height: 150px; margin: 0 auto 20px; border-radius: 50%; overflow: hidden; border: 4px solid #52b788;">
+                    <img src="{% static 'logo.jpg' %}" alt="MD Sadique Amin" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <h3 style="color: #2d6a4f; margin-bottom: 5px;">MD Sadique Amin</h3>
+                <span class="role-badge" style="background: #2d6a4f; color: white; padding: 4px 12px; border-radius: 12px; font-size: 0.85rem; font-weight: bold;">Solo Founder & Architect</span>
+                <p style="margin-top: 15px; color: #555; line-height: 1.6;">
+                    MD Sadique Amin built AgroTech to bridge the gap between advanced technology and Indian smallholders. From designing the caching live weather engine to structuring dynamic profiles and modern UX callback forms, this platform is built entirely as a solo engineering effort to model future climate-smart agricultural workflows.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE ACCORDION / FAQ SECTION -->
+    <section class="faq-section mt-5 mb-5">
+        <div class="section-heading text-center">
+            <h2>❓ Frequently Asked Questions</h2>
+        </div>
+
+        <div class="accordion-container mt-4">
+            <details>
+                <summary>How does AgroTech calculate real-time weather advisories?</summary>
+                <div class="accordion-content">
+                    <p>AgroTech links real-time Open-Meteo satellite feed with humidity, temperature, and precipitation sensors to generate dynamic recommendations for irrigation, pesticide spraying, and crop harvesting.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>Can small-scale farmers afford AgroTech IoT devices?</summary>
+                <div class="accordion-content">
+                    <p>Yes! We offer affordable pay-per-use drone spraying, community sensor shares, and free mobile weather advisories tailored specifically for smallholder farms.</p>
+                </div>
+            </details>
+
+            <details>
+                <summary>Which Indian states does AgroTech currently cover?</summary>
+                <div class="accordion-content">
+                    <p>We provide full real-time weather monitoring and agricultural services across all 28 states and 8 Union Territories in India including Gujarat, Maharashtra, Punjab, UP, Bihar, Rajasthan, Tamil Nadu, and West Bengal.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+        color: white;
+        padding: 70px 20px;
+        text-align: center;
+    }
+
+    .hero-badge {
+        background: rgba(255, 255, 255, 0.15);
+        color: #d8f3dc;
+        border: 1px solid #52b788;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .about-page-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    /* Impact Stats Section */
+    .impact-stats-section {
+        margin-top: -35px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .stats-container {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        text-align: center;
+    }
+
+    .impact-stat-item {
+        padding: 10px;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+        font-weight: bold;
+        color: #2d6a4f;
+        display: block;
+    }
+
+    .stat-title {
+        font-size: 0.95rem;
+        color: #555;
+        font-weight: 600;
+    }
+
+    /* Mission Vision Cards */
+    .mission-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        transition: transform 0.3s;
+    }
+
+    .mission-card:hover {
+        transform: translateY(-6px);
+    }
+
+    .mission-card .card-img-wrap {
+        height: 200px;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+
+    .mission-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .mission-card h3 {
+        color: #1b4332;
+        font-size: 1.5rem;
+        margin-bottom: 12px;
+
+    }
+
+    .mission-card p {
+        color: #555;
+        line-height: 1.6;
+    }
+
+    /* Timeline Section */
+    .timeline {
+        position: relative;
+        max-width: 900px;
+        margin: 40px auto 0;
+    }
+
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background-color: #52b788;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+    }
+
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+    .timeline-item.left { left: 0; }
+    .timeline-item.right { left: 50%; }
+
+    .timeline-item::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right: -10px;
+        background-color: white;
+        border: 4px solid #2d6a4f;
+        top: 25px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+
+    .timeline-item.right::after {
+        left: -10px;
+    }
+
+    .timeline-content {
+        padding: 25px;
+        background-color: white;
+        position: relative;
+        border-radius: 14px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.07);
+    }
+
+    .year-badge {
+        background: #2d6a4f;
+        color: white;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 0.85rem;
+        font-weight: bold;
+
+    }
+
+    .timeline-content h3 {
+        color: #1b4332;
+        margin: 10px 0;
+        font-size: 1.2rem;
+    }
+
+    .timeline-content p {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    /* Pillars Grid */
+    .pillars-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+    }
+
+    .pillar-card {
+        background: white;
+        padding: 30px;
+        border-radius: 14px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        text-align: center;
+        border-bottom: 4px solid #40916c;
+        transition: transform 0.3s;
+    }
+
+    .pillar-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .pillar-icon {
+        font-size: 45px;
+        margin-bottom: 15px;
+    }
+
+    .pillar-card h3 {
+        color: #1b4332;
+        font-size: 1.25rem;
+        margin-bottom: 10px;
+    }
+
+    .pillar-card p {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    /* Team Section */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 25px;
+    }
+
+    .team-card {
+        background: white;
+        padding: 20px;
+        border-radius: 14px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+        text-align: center;
+        transition: transform 0.3s;
+    }
+
+    .team-card:hover {
+        transform: translateY(-8px);
+    }
+
+    .team-img-wrap {
+        height: 200px;
+        overflow: hidden;
+        border-radius: 12px;
+        margin-bottom: 15px;
+    }
+
+    .team-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s;
+    }
+
+    .team-card:hover img {
+        transform: scale(1.06);
+    }
+
+    .team-card h3 {
+        color: #1b4332;
+        margin-bottom: 5px;
+    }
+
+    .role-badge {
+        color: #2d6a4f;
+        font-weight: bold;
+        font-size: 0.85rem;
+        background: #e8f5e9;
+        padding: 4px 12px;
+        border-radius: 12px;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .team-card p {
+        color: #666;
+        font-size: 0.85rem;
+    }
+
+    /* Accordion FAQ */
+    details {
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    summary {
+        padding: 18px 25px;
+        font-weight: bold;
+        font-size: 1.05rem;
+        color: #1b4332;
+        cursor: pointer;
+    }
+
+    .accordion-content {
+        padding: 0 25px 20px;
+        color: #555;
+        line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+        .timeline::after { left: 31px; }
+        .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+        .timeline-item.right { left: 0; }
+        .timeline-item.left::after, .timeline-item.right::after { left: 21px; }
+    }
+</style>
+{% endblock %}

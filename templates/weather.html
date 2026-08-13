@@ -1,0 +1,768 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Live Weather & Farm Advisory - AgroTech{% endblock %}
+
+{% block hero %}
+<div class="weather-hero">
+    <div class="hero-content">
+        <h1>🌤️ Live Real-Time Indian Weather Portal</h1>
+        <p>Accurate live weather conditions, 7-day forecasts, and agricultural advisories for all states of India.</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="weather-page-container">
+
+    <!-- Indian States & City Search Header -->
+    <section class="search-bar-section">
+        <div class="search-card">
+            <h2>📍 Select State or Search City in India</h2>
+            <form method="POST" action="{% url 'weather' %}" class="weather-search-form">
+                {% csrf_token %}
+                <div class="input-wrapper">
+                    <input type="text" name="city" id="city-input" placeholder="Type any Indian city, district or state (e.g. Begusarai, Ludhiana, Jaipur...)" value="{{ selected_city }}" required>
+                    <button type="submit" class="btn-search">🔍 Fetch Live Weather</button>
+                </div>
+            </form>
+
+            {% if error_message %}
+                <div class="alert alert-error mt-3">⚠️ {{ error_message }}</div>
+            {% endif %}
+
+            <!-- All Indian States Quick Selector Tabular Matrix -->
+            <div class="quick-states-tabular-wrapper mt-4">
+                <div class="table-header-box">
+                    <div class="title-meta">
+                        <span class="quick-label">⚡ All-India State Agronomy & Live Weather Directory</span>
+                        <p class="quick-sub">Click any state row or button to fetch live real-time weather & 7-day crop forecasts.</p>
+                    </div>
+                    <div class="search-filter-box">
+                        <input type="text" id="state-table-search" placeholder="🔍 Search state, crop, or pincode..." onkeyup="filterStateTable()">
+                    </div>
+                </div>
+
+                <div class="table-responsive-container mt-3">
+                    <table class="state-agronomy-table" id="stateTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>🇮🇳 State & Major Region</th>
+                                <th>📮 Pincode Range</th>
+                                <th>🌾 Major Crops (Sabse Zyada Kheti)</th>
+                                <th>⚡ Live Weather</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for st in indian_states %}
+                            <tr class="{% if selected_city == st.name %}table-row-active{% endif %}">
+                                <td><span class="row-num">{{ forloop.counter }}</span></td>
+                                <td>
+                                    <div class="state-cell">
+                                        <strong class="state-name">{{ st.state }}</strong>
+                                        <span class="capital-name">📍 {{ st.capital }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="pincode-badge">📮 {{ st.pincode }}</span>
+                                </td>
+                                <td>
+                                    <div class="crops-flex">
+                                        <span class="crops-text">🌱 {{ st.crops }}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <form method="POST" action="{% url 'weather' %}" style="display:inline;">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="city" value="{{ st.name }}">
+                                        <button type="submit" class="btn-table-action {% if selected_city == st.name %}active-btn{% endif %}">
+                                            🌤️ Fetch Weather
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    {% if weather_data %}
+    <!-- LIVE CURRENT WEATHER CARD -->
+    <section class="current-weather-section mt-4">
+        <div class="current-weather-card {{ weather_data.bg }}">
+            <div class="card-top-info">
+                <div class="location-box">
+                    <span class="live-tag">● LIVE REAL-TIME DATA</span>
+                    <h2 class="location-name">📍 {{ weather_data.city }}</h2>
+                </div>
+                <div class="condition-badge">
+                    <span class="weather-big-icon">{{ weather_data.icon }}</span>
+                    <span class="condition-text">{{ weather_data.description }}</span>
+                </div>
+            </div>
+
+            <div class="temp-main-display">
+                <div class="temp-number">
+                    {{ weather_data.temperature }}<span class="unit">°C</span>
+                </div>
+                <div class="temp-sub">
+                    Feels like <strong>{{ weather_data.feels_like }}°C</strong>
+                </div>
+            </div>
+
+            <!-- Weather Metrics Grid -->
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <span class="metric-icon">💧</span>
+                    <div class="metric-data">
+                        <span class="metric-label">Humidity</span>
+                        <strong class="metric-val">{{ weather_data.humidity }}%</strong>
+                    </div>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-icon">💨</span>
+                    <div class="metric-data">
+                        <span class="metric-label">Wind Speed</span>
+                        <strong class="metric-val">{{ weather_data.wind_speed }} km/h</strong>
+                    </div>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-icon">📊</span>
+                    <div class="metric-data">
+                        <span class="metric-label">Pressure</span>
+                        <strong class="metric-val">{{ weather_data.pressure }} hPa</strong>
+                    </div>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-icon">🌡️</span>
+                    <div class="metric-data">
+                        <span class="metric-label">Conditions</span>
+                        <strong class="metric-val">{{ weather_data.description }}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AGRICULTURAL ADVISORY SECTION -->
+    {% if weather_data.advisories %}
+    <section class="advisory-section mt-4">
+        <div class="advisory-card">
+            <h3>🌾 Agricultural Weather Advisory for {{ weather_data.city }}</h3>
+            <div class="advisory-list">
+                {% for adv in weather_data.advisories %}
+                    <div class="advisory-item">
+                        <p>{{ adv }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- 7-DAY DETAILED FORECAST SECTION -->
+    {% if weather_data.forecast %}
+    <section class="forecast-section mt-4">
+        <h2 class="section-title">📅 Detailed 7-Day Weather Forecast</h2>
+        <div class="forecast-cards-grid">
+            {% for day in weather_data.forecast %}
+                <div class="forecast-card {% if forloop.first %}today-card{% endif %}">
+                    <div class="forecast-day-header">
+                        <h4>{{ day.day }}</h4>
+                        <span class="forecast-date">{{ day.date }}</span>
+                    </div>
+
+                    <div class="forecast-body">
+                        <span class="forecast-icon">{{ day.icon }}</span>
+                        <p class="forecast-desc">{{ day.condition }}</p>
+
+                        <div class="temp-range">
+                            <span class="high-temp">🔺 {{ day.temp_max }}°C</span>
+                            <span class="low-temp">🔻 {{ day.temp_min }}°C</span>
+                        </div>
+
+                        <div class="rain-chance">
+                            <span>☔ Rain Risk: <strong>{{ day.precipitation_prob }}%</strong></span>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {% endif %}
+
+    <!-- FARMING WEATHER TIPS -->
+    <section class="weather-tips mt-5">
+        <h2 class="section-title">💡 Smart Weather Tips for Farmers</h2>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <img src="{% static 'Tip1.webp' %}" alt="Weather Tip 1">
+                <h4>Monitor Daily Forecasts</h4>
+                <p>Track humidity and wind parameters to optimize sowing schedules and fertilizer intake.</p>
+            </div>
+            <div class="tip-card">
+                <img src="{% static 'Tip2.webp' %}" alt="Weather Tip 2">
+                <h4>Soil Mulching in High Heat</h4>
+                <p>Apply organic mulch layer to retain soil moisture during extreme heatwaves above 35°C.</p>
+            </div>
+            <div class="tip-card">
+                <img src="{% static 'Tip3.webp' %}" alt="Weather Tip 3">
+                <h4>Precision Drip Irrigation</h4>
+                <p>Utilize drip irrigation systems to save water during dry spells and prevent root rot.</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .weather-hero {
+        background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .weather-page-container {
+        max-width: 1200px;
+        margin: 0 auto 60px;
+        padding: 0 20px;
+    }
+
+    /* Search & States Bar */
+    .search-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        margin-top: -30px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .search-card h2 {
+        color: #1b4332;
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+
+    .weather-search-form {
+        margin-bottom: 20px;
+    }
+
+    .input-wrapper {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .input-wrapper input {
+        flex: 1;
+        min-width: 280px;
+        padding: 14px 18px;
+        border: 2px solid #52b788;
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+    }
+
+    .input-wrapper input:focus {
+        outline: none;
+        border-color: #1b4332;
+        box-shadow: 0 0 0 3px rgba(45, 106, 79, 0.2);
+    }
+
+    .btn-search {
+        background-color: #2d6a4f;
+        color: white;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .btn-search:hover {
+        background-color: #1b4332;
+    }
+
+    /* State Pills */
+    .quick-states-wrapper {
+        border-top: 1px dashed #e0e0e0;
+        padding-top: 15px;
+    }
+
+    .quick-label {
+        font-size: 0.9rem;
+        font-weight: bold;
+        color: #555;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .state-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        max-height: 120px;
+        overflow-y: auto;
+        padding-right: 5px;
+    }
+
+    .state-pill {
+        background-color: #e8f5e9;
+        color: #1b4332;
+        border: 1px solid #b7e4c7;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .state-pill:hover {
+        background-color: #52b788;
+        color: white;
+    }
+
+    .state-pill.active {
+        background-color: #2d6a4f;
+        color: white;
+    }
+
+    /* Current Weather Card */
+    .current-weather-card {
+        background: linear-gradient(135deg, #2d6a4f 0%, #1b4332 100%);
+        color: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .card-top-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .live-tag {
+        background: rgba(46, 196, 182, 0.25);
+        color: #2ec4b6;
+        border: 1px solid #2ec4b6;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 12px;
+    }
+
+    .location-name {
+        font-size: 2rem;
+        margin-top: 5px;
+        color: white;
+    }
+
+    .condition-badge {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        padding: 8px 20px;
+        border-radius: 30px;
+    }
+
+    .weather-big-icon {
+        font-size: 40px;
+    }
+
+    .condition-text {
+        font-size: 1.2rem;
+        font-weight: bold;
+    }
+
+    .temp-main-display {
+        margin: 30px 0;
+    }
+
+    .temp-number {
+        font-size: 4.5rem;
+        font-weight: bold;
+        line-height: 1;
+    }
+
+    .temp-number .unit {
+        font-size: 2.5rem;
+        color: #b7e4c7;
+    }
+
+    .temp-sub {
+        font-size: 1.1rem;
+        color: #d8f3dc;
+        margin-top: 5px;
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        padding-top: 25px;
+    }
+
+    .metric-item {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+    .metric-icon {
+        font-size: 30px;
+    }
+
+    .metric-label {
+        font-size: 0.8rem;
+        color: #b7e4c7;
+        text-transform: uppercase;
+    }
+
+    .metric-val {
+        display: block;
+        font-size: 1.1rem;
+        color: white;
+    }
+
+    /* Advisory Card */
+    .advisory-card {
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        border-left: 6px solid #40916c;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+
+    .advisory-card h3 {
+        color: #1b4332;
+        margin-bottom: 15px;
+    }
+
+    .advisory-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .advisory-item {
+        background: #f4fbf7;
+        padding: 12px 18px;
+        border-radius: 8px;
+        border: 1px solid #d8f3dc;
+    }
+
+    .advisory-item p {
+        margin: 0;
+        font-weight: 600;
+        color: #2d6a4f;
+    }
+
+    /* Forecast Section */
+    .section-title {
+        color: #1b4332;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+    }
+
+    .forecast-cards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+    }
+
+    .forecast-card {
+        background: white;
+        padding: 20px 15px;
+        border-radius: 14px;
+        text-align: center;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        transition: transform 0.3s;
+        border: 1px solid #e9ecef;
+    }
+
+    .forecast-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }
+
+    .forecast-card.today-card {
+        border: 2px solid #52b788;
+        background: #f8fcf9;
+    }
+
+    .forecast-day-header h4 {
+        color: #1b4332;
+        margin-bottom: 3px;
+    }
+
+    .forecast-date {
+        font-size: 0.75rem;
+        color: #888;
+    }
+
+    .forecast-icon {
+        font-size: 38px;
+        display: block;
+        margin: 12px 0 6px;
+    }
+
+    .forecast-desc {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #555;
+        min-height: 35px;
+    }
+
+    .temp-range {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin: 10px 0;
+        font-size: 0.85rem;
+        font-weight: bold;
+    }
+
+    .high-temp { color: #d90429; }
+    .low-temp { color: #0077b6; }
+
+    .rain-chance {
+        font-size: 0.8rem;
+        color: #666;
+        background: #eef7f2;
+        padding: 4px;
+        border-radius: 6px;
+    }
+
+    /* State Agronomy Directory Table Styling */
+    .quick-states-tabular-wrapper {
+        background: #f8fcf9;
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid #d8f3dc;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.03);
+    }
+
+    .table-header-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 10px;
+    }
+
+    .title-meta .quick-label {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1b4332;
+        display: block;
+    }
+
+    .quick-sub {
+        font-size: 0.85rem;
+        color: #555;
+        margin: 4px 0 0 0;
+    }
+
+    .search-filter-box #state-table-search {
+        padding: 10px 18px;
+        border-radius: 25px;
+        border: 1.5px solid #b7e4c7;
+        font-size: 0.9rem;
+        width: 280px;
+        outline: none;
+        transition: border-color 0.3s;
+        background: white;
+    }
+
+    .search-filter-box #state-table-search:focus {
+        border-color: #2d6a4f;
+        box-shadow: 0 0 8px rgba(45,106,79,0.15);
+    }
+
+    .table-responsive-container {
+        overflow-x: auto;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        background: white;
+    }
+
+    .state-agronomy-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.92rem;
+    }
+
+    .state-agronomy-table th {
+        background: linear-gradient(135deg, #1b4332 0%, #2d6a4f 100%);
+        color: white;
+        padding: 14px 16px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        border: none;
+    }
+
+    .state-agronomy-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid #f0f0f0;
+        vertical-align: middle;
+    }
+
+    .state-agronomy-table tbody tr {
+        transition: background-color 0.2s;
+    }
+
+    .state-agronomy-table tbody tr:hover {
+        background-color: #f0fff4;
+    }
+
+    .table-row-active {
+        background-color: #e8f5e9 !important;
+        border-left: 5px solid #2d6a4f;
+    }
+
+    .row-num {
+        font-weight: bold;
+        color: #777;
+        font-size: 0.85rem;
+    }
+
+    .state-cell {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .state-name {
+        color: #1b4332;
+        font-size: 1rem;
+        font-weight: 700;
+    }
+
+    .capital-name {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: 2px;
+    }
+
+    .pincode-badge {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 5px 12px;
+        border-radius: 12px;
+        font-size: 0.82rem;
+        font-weight: bold;
+        display: inline-block;
+        border: 1px solid #c8e6c9;
+    }
+
+    .crops-text {
+        color: #2d6a4f;
+        font-size: 0.88rem;
+        font-weight: 500;
+    }
+
+    .btn-table-action {
+        background: #2d6a4f;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.82rem;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .btn-table-action:hover {
+        background: #1b4332;
+        transform: scale(1.04);
+    }
+
+    .btn-table-action.active-btn {
+        background: #ffd700;
+        color: #1b4332;
+        box-shadow: 0 2px 8px rgba(255,215,0,0.4);
+    }
+
+    /* Tips Grid */
+    .tips-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+    }
+
+    .tip-card {
+        background: white;
+        padding: 25px;
+        border-radius: 14px;
+        box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+        text-align: center;
+    }
+
+    .tip-card img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+
+    .tip-card h4 {
+        color: #1b4332;
+        margin-bottom: 10px;
+    }
+
+    .tip-card p {
+        color: #666;
+        font-size: 0.9rem;
+    }
+</style>
+
+<script>
+function filterStateTable() {
+    var input = document.getElementById("state-table-search");
+    var filter = input.value.toLowerCase();
+    var table = document.getElementById("stateTable");
+    var tr = table.getElementsByTagName("tr");
+
+    for (var i = 1; i < tr.length; i++) {
+        var rowText = tr[i].innerText.toLowerCase();
+        if (rowText.indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+</script>
+{% endblock %}

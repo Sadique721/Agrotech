@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login | AgroTech Solutions{% endblock %}
+
+{% block hero %}
+<div class="hero-content">
+    <h1>Login</h1>
+    <p>Welcome back! Please enter your credentials to access your account.</p>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 20px;
+    }
+    .login-box {
+        background: white;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        text-align: center;
+        width: 100%;
+        max-width: 420px;
+    }
+    .login-box h2 {
+        margin-bottom: 25px;
+        color: #2d6a4f;
+        font-size: 1.8rem;
+    }
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s;
+        box-sizing: border-box;
+    }
+    .login-box input:focus {
+        outline: none;
+        border-color: #4CAF50;
+        box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+    }
+    .login-box button {
+        width: 100%;
+        padding: 12px;
+        background: #4CAF50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: bold;
+        margin-top: 10px;
+        transition: background 0.3s;
+    }
+    .login-box button:hover {
+        background: #388E3C;
+    }
+    .login-box p {
+        margin-top: 15px;
+        color: #555;
+    }
+    .login-box a {
+        color: #4CAF50;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .login-box a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- FIX: Removed erroneous </head><body> tags that were inside block content -->
+<div class="login-container">
+    <div class="login-box">
+        <h2>🌿 Login to AgroTech</h2>
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <!-- FIX: "Registeration" → "Registration" typo fixed -->
+        <p>Don't have an account? <a href="{% url 'registration' %}">Register</a></p>
+        <p><a href="{% url 'home' %}">← Back to Home</a></p>
+    </div>
+</div>
+{% endblock %}
