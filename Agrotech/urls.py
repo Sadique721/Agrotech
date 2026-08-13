@@ -8,5 +8,6 @@ urlpatterns = [
     path('', include('home.urls')),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve user-uploaded media regardless of DEBUG mode.
+# For high-traffic production, replace with a CDN or object storage (e.g., S3).
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
