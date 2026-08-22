@@ -6,12 +6,45 @@ services:
     preDeployCommand: python manage.py migrate --noinput
     startCommand: gunicorn Agrotech.wsgi:application --bind 0.0.0.0:$PORT --workers 3 --timeout 60 --access-logfile - --error-logfile -
     envVars:
-      - key: DATABASE_URL
-        sync: false
+      # Core
       - key: SECRET_KEY
         sync: false
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
         value: "agrotech-yzl4.onrender.com"
-
+      # MySQL Database (Aiven)
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "23778"
+      - key: DB_NAME
+        value: "defaultdb"
+      - key: DB_USERNAME
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      # Email (Gmail)
+      - key: EMAIL_BACKEND
+        value: "django.core.mail.backends.smtp.EmailBackend"
+      - key: EMAIL_HOST
+        value: "smtp.gmail.com"
+      - key: EMAIL_PORT
+        value: "587"
+      - key: EMAIL_USE_TLS
+        value: "True"
+      - key: EMAIL_HOST_USER
+        sync: false
+      - key: EMAIL_HOST_PASSWORD
+        sync: false
+      - key: DEFAULT_FROM_EMAIL
+        sync: false
+      - key: ADMIN_NOTIFICATION_EMAIL
+        sync: false
+      # Cloudinary (account: ddwrdkpkv)
+      - key: CLOUDINARY_CLOUD_NAME
+        value: "ddwrdkpkv"
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

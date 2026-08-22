@@ -1,5 +1,57 @@
 # Static Reference Data for AgroTech
 
+# Per-state city list for dropdown in weather page
+STATE_CITIES = {
+    "Gujarat": ["Ahmedabad", "Surat", "Vadodara", "Rajkot", "Bhavnagar", "Jamnagar", "Gandhinagar", "Anand", "Patan", "Morbi", "Mehsana", "Navsari"],
+    "Delhi": ["New Delhi", "Dwarka", "Rohini", "Shahdara", "Janakpuri", "Lajpat Nagar", "Connaught Place", "Karol Bagh", "Saket"],
+    "Maharashtra": ["Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad", "Solapur", "Kolhapur", "Amravati", "Nanded", "Sangli", "Latur", "Akola"],
+    "Punjab": ["Ludhiana", "Amritsar", "Jalandhar", "Patiala", "Bathinda", "Mohali", "Hoshiarpur", "Gurdaspur", "Firozpur", "Fazilka", "Moga"],
+    "Uttar Pradesh": ["Lucknow", "Varanasi", "Agra", "Kanpur", "Prayagraj", "Meerut", "Ghaziabad", "Noida", "Mathura", "Ayodhya", "Gorakhpur", "Moradabad"],
+    "Bihar": ["Patna", "Gaya", "Bhagalpur", "Muzaffarpur", "Darbhanga", "Purnia", "Arrah", "Begusarai", "Katihar", "Munger", "Chapra", "Samastipur"],
+    "Rajasthan": ["Jaipur", "Jodhpur", "Udaipur", "Kota", "Bikaner", "Ajmer", "Bhilwara", "Alwar", "Bharatpur", "Sikar", "Pali", "Nagaur"],
+    "West Bengal": ["Kolkata", "Howrah", "Durgapur", "Asansol", "Siliguri", "Malda", "Bardhaman", "Kharagpur", "Haldia", "Bankura", "Cooch Behar"],
+    "Madhya Pradesh": ["Bhopal", "Indore", "Gwalior", "Jabalpur", "Ujjain", "Sagar", "Dewas", "Satna", "Ratlam", "Rewa", "Murwara", "Singrauli"],
+    "Tamil Nadu": ["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem", "Tirunelveli", "Vellore", "Erode", "Thoothukudi", "Dindigul", "Thanjavur"],
+    "Karnataka": ["Bengaluru", "Mysuru", "Hubballi", "Mangaluru", "Belagavi", "Davanagere", "Ballari", "Vijayapura", "Shimoga", "Tumkur", "Bidar"],
+    "Kerala": ["Thiruvananthapuram", "Kochi", "Kozhikode", "Thrissur", "Kollam", "Palakkad", "Malappuram", "Kannur", "Alappuzha", "Kottayam"],
+    "Haryana": ["Gurugram", "Faridabad", "Panipat", "Ambala", "Yamunanagar", "Rohtak", "Hisar", "Karnal", "Sonipat", "Bhiwani", "Sirsa"],
+    "Andhra Pradesh": ["Visakhapatnam", "Vijayawada", "Guntur", "Nellore", "Kurnool", "Rajahmundry", "Tirupati", "Kadapa", "Eluru", "Ongole", "Anantapur"],
+    "Telangana": ["Hyderabad", "Warangal", "Karimnagar", "Nizamabad", "Khammam", "Ramagundam", "Mahbubnagar", "Nalgonda", "Adilabad", "Suryapet"],
+    "Assam": ["Guwahati", "Silchar", "Dibrugarh", "Jorhat", "Nagaon", "Tinsukia", "Tezpur", "Bongaigaon", "Dhubri", "Haflong", "Karimganj"],
+    "Odisha": ["Bhubaneswar", "Cuttack", "Rourkela", "Brahmapur", "Sambalpur", "Puri", "Balasore", "Bhadrak", "Baripada", "Jharsuguda"],
+    "Himachal Pradesh": ["Shimla", "Manali", "Dharamsala", "Solan", "Mandi", "Baddi", "Nahan", "Palampur", "Bilaspur", "Hamirpur", "Una"],
+    "Jammu & Kashmir": ["Srinagar", "Jammu", "Anantnag", "Sopore", "Baramulla", "Kathua", "Udhampur", "Poonch", "Rajouri", "Kulgam"],
+    "Jharkhand": ["Ranchi", "Jamshedpur", "Dhanbad", "Bokaro", "Deoghar", "Hazaribagh", "Giridih", "Ramgarh", "Phusro", "Medininagar"],
+    "Uttarakhand": ["Dehradun", "Haridwar", "Roorkee", "Haldwani", "Rudrapur", "Kashipur", "Rishikesh", "Mussoorie", "Nainital", "Almora"],
+    "Chhattisgarh": ["Raipur", "Bhilai", "Korba", "Bilaspur", "Durg", "Rajnandgaon", "Jagdalpur", "Raigarh", "Ambikapur", "Mahasamund"],
+}
+
+# Crop icon and image for each state (primary crop emoji + Cloudinary CDN image URL)
+STATE_CROP_INFO = {
+    "Gujarat":           {"icon": "🥜", "crop": "Groundnut", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/Peanuts_with_skin.jpg/320px-Peanuts_with_skin.jpg"},
+    "Delhi":             {"icon": "🌾", "crop": "Wheat",     "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Wheat_close-up.JPG/320px-Wheat_close-up.JPG"},
+    "Maharashtra":       {"icon": "🎋", "crop": "Sugarcane", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Saccharum_officinarum_MS_3443.jpg/320px-Saccharum_officinarum_MS_3443.jpg"},
+    "Punjab":            {"icon": "🌾", "crop": "Wheat",     "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Wheat_close-up.JPG/320px-Wheat_close-up.JPG"},
+    "Uttar Pradesh":     {"icon": "🎋", "crop": "Sugarcane", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Saccharum_officinarum_MS_3443.jpg/320px-Saccharum_officinarum_MS_3443.jpg"},
+    "Bihar":             {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Paddy_field_in_Andhra_Pradesh.jpg/320px-Paddy_field_in_Andhra_Pradesh.jpg"},
+    "Rajasthan":         {"icon": "🌿", "crop": "Mustard",   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Mustard_Field_Rajasthan_India.jpg/320px-Mustard_Field_Rajasthan_India.jpg"},
+    "West Bengal":       {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Paddy_field_in_Andhra_Pradesh.jpg/320px-Paddy_field_in_Andhra_Pradesh.jpg"},
+    "Madhya Pradesh":    {"icon": "🫘", "crop": "Soybean",   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Soybean_seeds.jpg/320px-Soybean_seeds.jpg"},
+    "Tamil Nadu":        {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Paddy_field_in_Andhra_Pradesh.jpg/320px-Paddy_field_in_Andhra_Pradesh.jpg"},
+    "Karnataka":         {"icon": "☕", "crop": "Coffee",    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/A_small_cup_of_coffee.JPG/320px-A_small_cup_of_coffee.JPG"},
+    "Kerala":            {"icon": "🌿", "crop": "Rubber",    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Rubber_tree.jpg/320px-Rubber_tree.jpg"},
+    "Haryana":           {"icon": "🌾", "crop": "Basmati Rice", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Wheat_close-up.JPG/320px-Wheat_close-up.JPG"},
+    "Andhra Pradesh":    {"icon": "🌶️", "crop": "Chilli",    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Capsicum_annuum.jpg/320px-Capsicum_annuum.jpg"},
+    "Telangana":         {"icon": "🌿", "crop": "Cotton",    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/CottonPlant.JPG/320px-CottonPlant.JPG"},
+    "Assam":             {"icon": "🍵", "crop": "Tea",       "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/FrTea_Pickers_in_Assam_India.jpg/320px-FrTea_Pickers_in_Assam_India.jpg"},
+    "Odisha":            {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Paddy_field_in_Andhra_Pradesh.jpg/320px-Paddy_field_in_Andhra_Pradesh.jpg"},
+    "Himachal Pradesh":  {"icon": "🍎", "crop": "Apple",     "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Red_Apple.jpg/320px-Red_Apple.jpg"},
+    "Jammu & Kashmir":   {"icon": "🌸", "crop": "Saffron",   "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Saffron_crocus.jpg/320px-Saffron_crocus.jpg"},
+    "Jharkhand":         {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Paddy_field_in_Andhra_Pradesh.jpg/320px-Paddy_field_in_Andhra_Pradesh.jpg"},
+    "Uttarakhand":       {"icon": "🌾", "crop": "Basmati Rice", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Wheat_close-up.JPG/320px-Wheat_close-up.JPG"},
+    "Chhattisgarh":      {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Paddy_field_in_Andhra_Pradesh.jpg/320px-Paddy_field_in_Andhra_Pradesh.jpg"},
+}
+
 # List of major Indian States & Union Territories with coordinates for instant fast lookup
 INDIAN_STATES = [
     {

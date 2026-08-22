@@ -15,15 +15,38 @@
 {% block content %}
 <div class="weather-page-container">
 
-    <!-- Indian States & City Search Header -->
+    <!-- Search Section: State Dropdown + City Dropdown -->
     <section class="search-bar-section">
         <div class="search-card">
-            <h2>📍 Select State or Search City in India</h2>
-            <form method="POST" action="{% url 'weather' %}" class="weather-search-form">
+            <h2>📍 Select State &amp; City for Live Weather</h2>
+            <form method="POST" action="{% url 'weather' %}" class="weather-search-form" id="weatherDropdownForm">
                 {% csrf_token %}
-                <div class="input-wrapper">
-                    <input type="text" name="city" id="city-input" placeholder="Type any Indian city, district or state (e.g. Begusarai, Ludhiana, Jaipur...)" value="{{ selected_city }}" required>
-                    <button type="submit" class="btn-search">🔍 Fetch Live Weather</button>
+                <div class="dropdown-search-row">
+                    <!-- State Dropdown -->
+                    <div class="dropdown-group">
+                        <label for="state-select-dd">🗺️ Select State / UT</label>
+                        <select name="state_select" id="state-select-dd" class="weather-select" onchange="updateCityDropdown(this.value)">
+                            <option value="">-- Select State --</option>
+                            {% for st in indian_states %}
+                            <option value="{{ st.state }}" {% if selected_city == st.name %}selected{% endif %}>
+                                {{ st.crop_icon }} {{ st.state }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- City Dropdown (populated by JS) -->
+                    <div class="dropdown-group">
+                        <label for="city-select-dd">🏙️ Select City / District</label>
+                        <select name="city_select" id="city-select-dd" class="weather-select">
+                            <option value="">-- First select state --</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-search">🔍 Get Live Weather</button>
+                </div>
+                <!-- Also allow direct text search -->
+                <div class="direct-search-row">
+                    <span class="or-divider">— or type directly —</span>
+                    <input type="text" name="city" id="city-input" placeholder="Type any city, district or state..." value="{{ selected_city }}">
                 </div>
             </form>
 
@@ -31,65 +54,67 @@
                 <div class="alert alert-error mt-3">⚠️ {{ error_message }}</div>
             {% endif %}
 
-            <!-- All Indian States Quick Selector Tabular Matrix -->
-            <div class="quick-states-tabular-wrapper mt-4">
-                <div class="table-header-box">
-                    <div class="title-meta">
-                        <span class="quick-label">⚡ All-India State Agronomy & Live Weather Directory</span>
-                        <p class="quick-sub">Click any state row or button to fetch live real-time weather & 7-day crop forecasts.</p>
-                    </div>
-                    <div class="search-filter-box">
-                        <input type="text" id="state-table-search" placeholder="🔍 Search state, crop, or pincode..." onkeyup="filterStateTable()">
-                    </div>
+            <!-- State Cards Grid with crop icon + image -->
+            <div class="state-cards-section mt-4">
+                <div class="state-cards-header">
+                    <span class="quick-label">🌾 All-India State Agronomy Directory — Click to Fetch Live Weather</span>
+                    <input type="text" id="state-card-search" placeholder="🔍 Search state or crop..." onkeyup="filterStateCards()" class="card-search-input">
                 </div>
-
-                <div class="table-responsive-container mt-3">
-                    <table class="state-agronomy-table" id="stateTable">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>🇮🇳 State & Major Region</th>
-                                <th>📮 Pincode Range</th>
-                                <th>🌾 Major Crops (Sabse Zyada Kheti)</th>
-                                <th>⚡ Live Weather</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for st in indian_states %}
-                            <tr class="{% if selected_city == st.name %}table-row-active{% endif %}">
-                                <td><span class="row-num">{{ forloop.counter }}</span></td>
-                                <td>
-                                    <div class="state-cell">
-                                        <strong class="state-name">{{ st.state }}</strong>
-                                        <span class="capital-name">📍 {{ st.capital }}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="pincode-badge">📮 {{ st.pincode }}</span>
-                                </td>
-                                <td>
-                                    <div class="crops-flex">
-                                        <span class="crops-text">🌱 {{ st.crops }}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <form method="POST" action="{% url 'weather' %}" style="display:inline;">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="city" value="{{ st.name }}">
-                                        <button type="submit" class="btn-table-action {% if selected_city == st.name %}active-btn{% endif %}">
-                                            🌤️ Fetch Weather
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                <div class="state-cards-grid" id="stateCardsGrid">
+                    {% for st in indian_states %}
+                    <form method="POST" action="{% url 'weather' %}" class="state-card-form">
+                        {% csrf_token %}
+                        <input type="hidden" name="city_select" value="{{ st.city }}">
+                        <input type="hidden" name="state_select" value="{{ st.state }}">
+                        <button type="submit" class="state-card {% if selected_city == st.name %}state-card-active{% endif %}"
+                                data-state="{{ st.state }}" data-crop="{{ st.crop_name }}">
+                            {% if st.crop_img %}
+                            <div class="state-card-img-wrap">
+                                <img src="{{ st.crop_img }}" alt="{{ st.crop_name }}" class="state-card-crop-img" loading="lazy" onerror="this.style.display='none'">
+                                <div class="state-card-img-overlay"></div>
+                            </div>
+                            {% endif %}
+                            <div class="state-card-body">
+                                <div class="state-card-icon">{{ st.crop_icon }}</div>
+                                <div class="state-card-name">{{ st.state }}</div>
+                                <div class="state-card-crop">{{ st.crop_name }}</div>
+                                <div class="state-card-city">📍 {{ st.city }}</div>
+                            </div>
+                            {% if selected_city == st.name %}
+                            <div class="state-card-active-badge">● LIVE</div>
+                            {% endif %}
+                        </button>
+                    </form>
+                    {% endfor %}
                 </div>
             </div>
-
         </div>
     </section>
+
+    <!-- State→Cities JS data for dropdown -->
+    <script>
+    const STATE_CITIES_DATA = {{ state_cities_json | safe }};
+    function updateCityDropdown(stateName) {
+        const cityDd = document.getElementById('city-select-dd');
+        cityDd.innerHTML = '<option value="">-- Select City --</option>';
+        if (stateName && STATE_CITIES_DATA[stateName]) {
+            STATE_CITIES_DATA[stateName].forEach(function(city) {
+                const opt = document.createElement('option');
+                opt.value = city;
+                opt.textContent = city;
+                cityDd.appendChild(opt);
+            });
+        }
+    }
+    function filterStateCards() {
+        const q = document.getElementById('state-card-search').value.toLowerCase();
+        document.querySelectorAll('.state-card').forEach(function(card) {
+            const state = card.dataset.state.toLowerCase();
+            const crop  = card.dataset.crop.toLowerCase();
+            card.closest('.state-card-form').style.display = (state.includes(q) || crop.includes(q) || q === '') ? '' : 'none';
+        });
+    }
+    </script>
 
     {% if weather_data %}
     <!-- LIVE CURRENT WEATHER CARD -->
@@ -797,4 +822,177 @@ function filterStateTable() {
     }
 }
 </script>
+
+<style>
+/* ===== Dropdown Search Row ===== */
+.dropdown-search-row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+}
+.dropdown-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    min-width: 180px;
+}
+.dropdown-group label {
+    font-size: 12px;
+    font-weight: 700;
+    color: #2d6a4f;
+    letter-spacing: 0.3px;
+}
+.weather-select {
+    padding: 10px 14px;
+    border: 1.5px solid #b7e4c7;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #1b4332;
+    background: #f0fdf4;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    outline: none;
+}
+.weather-select:focus { border-color: #40916c; box-shadow: 0 0 0 3px rgba(64,145,108,0.15); }
+.direct-search-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+.or-divider {
+    font-size: 12px;
+    color: #888;
+    white-space: nowrap;
+}
+.direct-search-row input {
+    flex: 1;
+    min-width: 220px;
+    padding: 10px 14px;
+    border: 1.5px solid #d1fae5;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #1b4332;
+    background: #fafff9;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.direct-search-row input:focus { border-color: #52b788; }
+
+/* ===== State Cards Grid ===== */
+.state-cards-section { margin-top: 28px; }
+.state-cards-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+.quick-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1b4332;
+    background: #dcfce7;
+    padding: 5px 14px;
+    border-radius: 20px;
+}
+.card-search-input {
+    padding: 8px 14px;
+    border: 1.5px solid #b7e4c7;
+    border-radius: 20px;
+    font-size: 13px;
+    outline: none;
+    width: 220px;
+}
+.state-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 14px;
+}
+.state-card-form { display: block; }
+.state-card {
+    position: relative;
+    width: 100%;
+    background: #ffffff;
+    border: 1.5px solid #e0f2e9;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    text-align: center;
+    padding: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.state-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 28px rgba(29,67,53,0.15);
+    border-color: #52b788;
+}
+.state-card-active {
+    border-color: #2d6a4f !important;
+    box-shadow: 0 0 0 3px rgba(45,106,79,0.2), 0 8px 24px rgba(0,0,0,0.12);
+}
+.state-card-img-wrap {
+    position: relative;
+    height: 80px;
+    overflow: hidden;
+}
+.state-card-crop-img {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+    display: block;
+}
+.state-card-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 30%, rgba(27,67,50,0.55));
+}
+.state-card-body {
+    padding: 10px 8px 12px;
+}
+.state-card-icon {
+    font-size: 22px;
+    margin-bottom: 4px;
+    line-height: 1;
+}
+.state-card-name {
+    font-size: 12px;
+    font-weight: 800;
+    color: #1b4332;
+    margin-bottom: 2px;
+    line-height: 1.2;
+}
+.state-card-crop {
+    font-size: 10px;
+    color: #52b788;
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.state-card-city {
+    font-size: 10px;
+    color: #888;
+}
+.state-card-active-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: #16a34a;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+}
+@media (max-width: 600px) {
+    .dropdown-search-row { flex-direction: column; }
+    .state-cards-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+}
+</style>
 {% endblock %}

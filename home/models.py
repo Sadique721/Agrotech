@@ -49,7 +49,8 @@ class UserProfile(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True, validators=[validate_profile_image])
+    profile_picture = models.URLField(max_length=500, blank=True, null=True,
+                                      help_text="Cloudinary CDN URL for profile photo")
     phone = models.CharField(max_length=15, blank=True, null=True)
     state = models.CharField(max_length=100, blank=True, null=True)
     district = models.CharField(max_length=100, blank=True, null=True)

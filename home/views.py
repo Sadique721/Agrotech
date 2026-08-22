@@ -14,7 +14,7 @@ from django_ratelimit.decorators import ratelimit
 from django_ratelimit.exceptions import Ratelimited
 from .models import Contact, UserProfile, NewsletterSubscriber
 from .forms import UserRegistrationForm, UserProfileForm
-from .data import INDIAN_STATES, WMO_WEATHER_CODES
+from .data import INDIAN_STATES, WMO_WEATHER_CODES, STATE_CITIES, STATE_CROP_INFO
 import requests
 import datetime
 import logging
@@ -203,32 +203,54 @@ def weather(request):
     error_message = None
 
     if request.method == "POST":
-        query = request.POST.get("city", "").strip()
-        if query:
-            # Check if query matches state preset
-            matched_state = next((s for s in INDIAN_STATES if s["name"].lower() == query.lower() or s["city"].lower() == query.lower()), None)
+        # Support two-dropdown: state + city OR direct text query
+        state_sel = request.POST.get("state_select", "").strip()
+        city_sel  = request.POST.get("city_select", "").strip()
+        query     = request.POST.get("city", "").strip()
+
+        # Priority: dropdown city > text input city
+        lookup = city_sel or query
+        if state_sel and not city_sel:
+            lookup = state_sel  # fallback: just state selected
+
+        if lookup:
+            matched_state = next((s for s in INDIAN_STATES if s["name"].lower() == lookup.lower() or s["city"].lower() == lookup.lower() or s["state"].lower() == lookup.lower()), None)
             if matched_state:
                 selected_city = matched_state["name"]
                 lat, lon = matched_state["lat"], matched_state["lon"]
             else:
-                geo = geocode_city_india(query)
+                geo = geocode_city_india(lookup)
                 if geo:
                     selected_city = f"{geo['name']}, {geo['state']}"
                     lat, lon = geo['lat'], geo['lon']
                 else:
-                    error_message = f"Location '{query}' could not be resolved. Showing default weather for Gujarat (Patan)."
+                    error_message = f"Location '{lookup}' could not be resolved. Showing default weather for Gujarat (Patan)."
         else:
-            error_message = "Please enter a state or city name."
+            error_message = "Please select a state and city or type a location."
 
     # Fetch live 100% real-time data
     weather_data = fetch_realtime_weather_openmeteo(lat, lon, selected_city)
     if weather_data is None and not error_message:
         error_message = "Weather service is temporarily unavailable. Please try again in a moment."
 
+    # Enrich INDIAN_STATES with crop icon & image from STATE_CROP_INFO
+    enriched_states = []
+    for st in INDIAN_STATES:
+        crop_info = STATE_CROP_INFO.get(st["state"], {"icon": "🌱", "crop": st["crops"].split(",")[0].strip(), "img": ""})
+        cities = STATE_CITIES.get(st["state"], [st["city"]])
+        enriched_states.append({
+            **st,
+            "crop_icon": crop_info["icon"],
+            "crop_name": crop_info["crop"],
+            "crop_img":  crop_info["img"],
+            "cities":    cities,
+        })
+
     return render(request, 'weather.html', {
         "weather_data": weather_data,
         "error_message": error_message,
-        "indian_states": INDIAN_STATES,
+        "indian_states": enriched_states,
+        "state_cities_json": {st["state"]: STATE_CITIES.get(st["state"], [st["city"]]) for st in INDIAN_STATES},
         "selected_city": selected_city
     })
 
@@ -404,7 +426,6 @@ def user_logout(request):
 def user_profile(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
-    from .forms import UserProfileForm
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
@@ -416,12 +437,44 @@ def user_profile(request):
                 request.user.email = email
             request.user.save()
 
-            # Handle picture removal manually if checkboxed
+            # Handle profile picture — upload to Cloudinary, store URL in DB
             if request.POST.get('remove_picture') == 'true':
                 profile.profile_picture = None
+            elif 'profile_picture' in request.FILES:
+                pic_file = request.FILES['profile_picture']
+                try:
+                    import cloudinary.uploader
+                    upload_result = cloudinary.uploader.upload(
+                        pic_file,
+                        public_id=f"agrotech/profiles/{request.user.username}",
+                        overwrite=True,
+                        resource_type="image",
+                        quality="auto:good",
+                        fetch_format="auto",
+                        width=400,
+                        height=400,
+                        crop="fill",
+                        gravity="face",
+                    )
+                    profile.profile_picture = upload_result["secure_url"]
+                    logger.info("Profile picture uploaded to Cloudinary for user: %s", request.user.username)
+                except Exception as e:
+                    logger.error("Cloudinary profile picture upload failed for %s: %s", request.user.username, e)
+                    messages.error(request, "Profile picture upload failed. Please try again.")
+                    return redirect('user_profile')
 
-            form.save()
-            messages.success(request, "Your profile details and picture have been updated successfully!")
+            # Save profile without re-triggering the file field
+            profile.phone = form.cleaned_data.get('phone', '')
+            profile.state = form.cleaned_data.get('state', '')
+            profile.district = form.cleaned_data.get('district', '')
+            profile.farm_size = form.cleaned_data.get('farm_size', '')
+            profile.primary_crops = form.cleaned_data.get('primary_crops', '')
+            profile.experience_years = form.cleaned_data.get('experience_years', 0)
+            profile.bio = form.cleaned_data.get('bio', '')
+            profile.avatar = form.cleaned_data.get('avatar', 'farmer1')
+            profile.save()
+
+            messages.success(request, "Your profile has been updated successfully!")
             return redirect('user_profile')
         else:
             for field, errors in form.errors.items():

@@ -49,14 +49,20 @@ INSTALLED_APPS = [
     'cloudinary',
 ]
 
-# Persistent media storage (profile pictures, etc.) via Cloudinary.
+# Cloudinary — media storage for profile pictures & uploaded assets
 CLOUDINARY_CLOUD_NAME = config('CLOUDINARY_CLOUD_NAME', default='')
-if CLOUDINARY_CLOUD_NAME:
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
-        'API_KEY': config('CLOUDINARY_API_KEY', default=''),
-        'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
-    }
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': CLOUDINARY_CLOUD_NAME,
+    'API_KEY': config('CLOUDINARY_API_KEY', default=''),
+    'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
+}
+import cloudinary
+cloudinary.config(
+    cloud_name=CLOUDINARY_CLOUD_NAME,
+    api_key=config('CLOUDINARY_API_KEY', default=''),
+    api_secret=config('CLOUDINARY_API_SECRET', default=''),
+    secure=True
+)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,13 +97,23 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Agrotech.wsgi.application'
 
 
-import dj_database_url
-
 DATABASES = {
-    'default': dj_database_url.config(
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        conn_max_age=600,
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': config('DB_NAME', default='defaultdb'),
+        'USER': config('DB_USERNAME', default='avnadmin'),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default='3306'),
+        'OPTIONS': {
+            'charset': 'utf8mb4',
+            'connect_timeout': 10,
+            'ssl': {'ca': None},  # Aiven requires SSL, ca=None accepts server cert
+        },
+        'TEST': {
+            'NAME': 'test_agrotech_db',
+        },
+    }
 }
 
 
@@ -215,5 +231,50 @@ ADMIN_NOTIFICATION_EMAIL = config('ADMIN_NOTIFICATION_EMAIL', default='')
 
 AGROTECH_HELPLINE = config('AGROTECH_HELPLINE', default='+91 9318302850')
 
-
-
+# Cloudinary CDN URLs for all project images (uploaded via scripts/upload_static_to_cloudinary.py)
+# These replace local static file references in templates with fast Cloudinary CDN delivery
+CLOUDINARY_IMAGE_URLS = {
+    "24": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384798/agrotech/24.jpg",
+    "ads": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384799/agrotech/ADS.jpg",
+    "afs": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384800/agrotech/AFS.jpg",
+    "ceo": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384802/agrotech/CEO.jpg",
+    "cha": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384803/agrotech/CHA.jpg",
+    "chm": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384804/agrotech/CHM.jpg",
+    "cmo": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384805/agrotech/CMO.jpg",
+    "cto": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384806/agrotech/CTO.jpg",
+    "cw": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384807/agrotech/cw.jpg",
+    "ds": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384808/agrotech/ds.jpg",
+    "ee": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384809/agrotech/ee.jpg",
+    "fms": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384810/agrotech/FMS.jpg",
+    "ga": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384811/agrotech/GA.jpg",
+    "hs": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384812/agrotech/HS.jpg",
+    "hwd1": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384812/agrotech/HWD1.jpg",
+    "ic": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384813/agrotech/ic.jpg",
+    "is": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384815/agrotech/is.jpg",
+    "lm": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384817/agrotech/LM.jpg",
+    "logo": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384818/agrotech/logo.jpg",
+    "ml": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384820/agrotech/ML.jpg",
+    "om": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384822/agrotech/OM.jpg",
+    "ov": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384823/agrotech/ov.jpg",
+    "pcs": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384826/agrotech/PCS.jpg",
+    "pp": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384829/agrotech/PP.jpg",
+    "scm": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384830/agrotech/SCM.jpg",
+    "slide1": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384831/agrotech/slide1.jpg",
+    "slide2": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384832/agrotech/slide2.jpg",
+    "slide3": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384833/agrotech/slide3.jpg",
+    "sm": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384834/agrotech/sm.jpg",
+    "tip1": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384835/agrotech/Tip1.jpg",
+    "tip2": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384836/agrotech/Tip2.jpg",
+    "tip3": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384837/agrotech/Tip3.jpg",
+    "tw": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384838/agrotech/TW.jpg",
+    "wc": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384839/agrotech/wc.jpg",
+    # Legends
+    "george_carver": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384840/agrotech/legends/george_carver.jpg",
+    "gregor_mendel": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384841/agrotech/legends/gregor_mendel.jpg",
+    "gurdev_khush": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384842/agrotech/legends/gurdev_khush.jpg",
+    "justus_liebig": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384843/agrotech/legends/justus_liebig.jpg",
+    "ms_swaminathan": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384845/agrotech/legends/ms_swaminathan.jpg",
+    "norman_borlaug": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384846/agrotech/legends/norman_borlaug.jpg",
+    "subhash_palekar": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384847/agrotech/legends/subhash_palekar.jpg",
+    "verghese_kurien": "https://res.cloudinary.com/ddwrdkpkv/image/upload/v1787384848/agrotech/legends/verghese_kurien.jpg",
+}
