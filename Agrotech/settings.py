@@ -72,6 +72,7 @@ cloudinary.config(
 )
 
 MIDDLEWARE = [
+    'home.middleware.RealIPMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
