@@ -127,3 +127,26 @@ class AgroTechViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 302) # Redirects back
         self.assertEqual(NewsletterSubscriber.objects.count(), 1)
 
+    def test_service_booking_email(self):
+        booking_url = reverse('service_booking')
+        response = self.client.post(booking_url, {
+            'name': 'Sadique Amin',
+            'email': 'customer@agrotech.com',
+            'service_name': 'Smart Irrigation System'
+        }, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertJSONEqual(response.content, {'status': 'ok', 'message': 'Callback request received successfully!'})
+        
+        # Verify lead created in Contact database model
+        self.assertEqual(Contact.objects.count(), 1)
+        lead = Contact.objects.first()
+        self.assertEqual(lead.name, 'Sadique Amin')
+        self.assertIn('Smart Irrigation System', lead.msg)
+        
+        # Verify emails sent (1 to customer, 1 to admin)
+        self.assertTrue(len(mail.outbox) >= 1)
+        customer_mail = mail.outbox[0]
+        self.assertEqual(customer_mail.to, ['customer@agrotech.com'])
+        self.assertIn('Smart Irrigation System', customer_mail.subject)
+
+

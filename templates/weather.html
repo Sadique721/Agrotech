@@ -142,6 +142,38 @@
                 </div>
 
                 <div class="metric-item">
+                    <span class="metric-icon">☀️</span>
+                    <div class="metric-data">
+                        <span class="metric-label">UV Index</span>
+                        <strong class="metric-val">{{ weather_data.uv_index }}</strong>
+                    </div>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-icon">🌱</span>
+                    <div class="metric-data">
+                        <span class="metric-label">Crop Water Loss (ET0)</span>
+                        <strong class="metric-val">{{ weather_data.et0_today }} mm/day</strong>
+                    </div>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-icon">🌫️</span>
+                    <div class="metric-data">
+                        <span class="metric-label">Dew Point</span>
+                        <strong class="metric-val">{{ weather_data.dew_point }}°C</strong>
+                    </div>
+                </div>
+
+                <div class="metric-item">
+                    <span class="metric-icon">🍃</span>
+                    <div class="metric-data">
+                        <span class="metric-label">Air Quality (AQI)</span>
+                        <strong class="metric-val">{{ weather_data.aqi }} (PM2.5: {{ weather_data.pm2_5 }})</strong>
+                    </div>
+                </div>
+
+                <div class="metric-item">
                     <span class="metric-icon">🌡️</span>
                     <div class="metric-data">
                         <span class="metric-label">Conditions</span>

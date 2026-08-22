@@ -23,8 +23,8 @@ services:
     environment:
       - DEBUG=False
       - PORT=8000
-      - DATABASE_URL=postgres://agrotech:${POSTGRES_PASSWORD:-agrotech_secure_pass}@db:5432/agrotech
-      - SECRET_KEY=${SECRET_KEY:-4wTz_7qxv5hJdCOxYuEeTFTGsoO89h-PlFSSf5Z5peU1855dSHRVLBFBNatkS4dd7Vg}
+      - DATABASE_URL=postgres://agrotech:${POSTGRES_PASSWORD:?POSTGRES_PASSWORD required}@db:5432/agrotech
+      - SECRET_KEY=${SECRET_KEY:?SECRET_KEY required}
       - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1}
     depends_on:
       - db

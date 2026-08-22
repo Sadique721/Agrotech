@@ -17,11 +17,11 @@
 
 <p align="center">
   <a href="https://agrotech-yzl4.onrender.com"><img src="https://img.shields.io/badge/Live%20Website-agrotech--yzl4.onrender.com-10b981?style=for-the-badge&logo=render&logoColor=white" alt="Live Website"></a>
-  <a href="https://github.com/Sadique721/Agrotech"><img src="https://img.shields.io/badge/Python-3.14-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"></a>
+  <a href="https://github.com/Sadique721/Agrotech"><img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"></a>
   <a href="https://github.com/Sadique721/Agrotech"><img src="https://img.shields.io/badge/Django-5.1.5-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django"></a>
   <a href="https://open-meteo.com/"><img src="https://img.shields.io/badge/Live%20API-Open--Meteo%20Weather-0077B6?style=for-the-badge" alt="Open-Meteo API"></a>
   <a href="https://github.com/Sadique721/Agrotech/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="License"></a>
-  <a href="https://github.com/Sadique721/Agrotech"><img src="https://img.shields.io/badge/Build-Passing-brightgreen?style=for-the-badge" alt="Build Status"></a>
+  <a href="https://github.com/Sadique721/Agrotech/actions/workflows/ci.yml"><img src="https://github.com/Sadique721/Agrotech/actions/workflows/ci.yml/badge.svg" alt="CI Status"></a>
 </p>
 
 ---
@@ -115,7 +115,7 @@ A dedicated educational portal celebrating agricultural pioneers with authentic 
 
 ## 🏗️ System Architecture & Tech Stack
 
-- **Backend Framework**: Python 3.14 + Django 5.1.5
+- **Backend Framework**: Python 3.12 + Django 5.1.5
 - **Frontend Architecture**: HTML5, Vanilla CSS3 (Custom Glassmorphism, CSS Grid, Flexbox), JavaScript ES6+
 - **Database**: SQLite3 (Production ready for PostgreSQL / MySQL)
 - **APIs Integrated**: Open-Meteo Forecast API & Geocoding API

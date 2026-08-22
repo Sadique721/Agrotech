@@ -214,12 +214,12 @@
 
         <div class="modal-booking-box">
             <h3>⚡ Request Callback & Instant Booking</h3>
-            <form id="ajaxBookingForm" method="POST" action="{% url 'contact' %}">
+            <form id="ajaxBookingForm" method="POST" action="{% url 'service_booking' %}">
                 {% csrf_token %}
-                <input type="hidden" name="msg" id="modalServiceMsg" value="Service Request">
+                <input type="hidden" name="service_name" id="modalServiceMsg" value="Service Request">
                 <div class="modal-form-grid">
-                    <input type="text" name="name" placeholder="Your Name" value="{% if user.is_authenticated %}{{ user.first_name|default:user.username }}{% endif %}" required>
-                    <input type="email" name="email" placeholder="Your Email" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" required>
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
                 </div>
                 <button type="submit" id="btnSubmitBooking" class="btn-submit-booking">Request Service Callback</button>
                 <div id="bookingStatus" style="margin-top: 12px; padding: 10px; border-radius: 6px; font-weight: bold; text-align: center; display: none;"></div>

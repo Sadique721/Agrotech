@@ -6,6 +6,7 @@ from .views import user_logout
 urlpatterns = [
     path("", views.home, name="home"),
     path("services/", views.services, name="services"),
+    path("service-booking/", views.service_booking, name="service_booking"),
     path("about/", views.about, name="about"),
     path("weather/", views.weather, name="weather"),
     path("legends/", views.legends, name="legends"),  # NEW PAGE: Agri Legends & Visionaries
