@@ -26,7 +26,9 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-dummy-key-for-build')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.onrender.com', cast=Csv())
+ALLOWED_HOSTS = list(config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv()))
+if '.onrender.com' not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append('.onrender.com')
 
 # Enable Authentication Backend
 AUTHENTICATION_BACKENDS = [
