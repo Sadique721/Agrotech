@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Pest Control Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #d97706 0%, #b45309 50%, #78350f 100%){% endblock %}
+{% block badge_text %}● BIOLOGICAL &amp; INTEGRATED PEST CONTROL{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #fffbeb, #fef3c7){% endblock %}
+{% block service_card_border %}1.5px solid #fcd34d{% endblock %}
+{% block service_badge_color %}#d97706{% endblock %}
+{% block service_title_color %}#b45309{% endblock %}
+{% block service_time_color %}#78350f{% endblock %}
+{% block expected_response_bg %}#fde68a{% endblock %}
+
+{% block service_details %}
+<div style="background:#fffbeb;border:1px solid #fef3c7;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#b45309;margin:0 0 12px;">🐛 Integrated Eco-Pest Management Solutions</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Our integrated pest control services target specific insect behaviors using organic pheromone traps, natural predators, and eco-friendly pesticide combinations. This preserves your soil structure and crop safety.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🕸️ <strong>Biological Traps:</strong> Target specific pests without chemicals.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🐝 <strong>Pollinator Protection:</strong> Safe for honeybees and beneficial insects.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🔬 <strong>Zero Residue:</strong> Protect your crops to pass export-quality checks.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#fffbeb;border:2px solid #fcd34d;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#d97706;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Pest Census Inspection</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Our field officers survey the land to identify insect species and density patterns.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#fffbeb;border:2px solid #fcd34d;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#d97706;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Pheromone Trap Placement</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Deploy biological traps at specific coordinates to interrupt pest breeding cycles.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#fffbeb;border:2px solid #fcd34d;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#d97706;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Periodic Field Audits</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Receive progress updates and subsequent natural spray recommendations on your app feed.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #d97706, #b45309){% endblock %}
+{% block cta_btn_bg %}#d97706{% endblock %}

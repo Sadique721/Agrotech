@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Precision Planting Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #064e3b 0%, #047857 50%, #059669 100%){% endblock %}
+{% block badge_text %}● PRECISION PLANTING &amp; SOWING{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1500937386664-56d159437b7f?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #d1fae5, #a7f3d0){% endblock %}
+{% block service_card_border %}1.5px solid #34d399{% endblock %}
+{% block service_badge_color %}#047857{% endblock %}
+{% block service_title_color %}#065f46{% endblock %}
+{% block service_time_color %}#064e3b{% endblock %}
+{% block expected_response_bg %}#6ee7b7{% endblock %}
+
+{% block service_details %}
+<div style="background:#d1fae5;border:1px solid #a7f3d0;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#065f46;margin:0 0 12px;">🌾 Smart Row Geometry &amp; Plant Density Calibration</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Optimize your planting metrics using depth mapping, precise seed-to-seed distance ratios, and row layout geometry tailored to soil moisture grids. Maximize germination percentage and uniform stalk growth.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">📏 <strong>Exact Spacing:</strong> Prevent nutrient wars among closely sown stalks.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">📐 <strong>Row Optimization:</strong> Up to 15% increase in total plant population limits.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🚜 <strong>Planter Integration:</strong> Calibrate vacuum seed plates and downforces.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#d1fae5;border:2px solid #34d399;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#047857;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Field Calibration</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">We test soil firmness, moisture levels, and residue cover to determine planting depth.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#d1fae5;border:2px solid #34d399;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#047857;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Planter Tuning</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Configure downforce and singulation rates on your mechanical tractor planter setup.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#d1fae5;border:2px solid #34d399;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#047857;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Germination Audit</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">10 days post-sowing, we conduct an audit to count emergent shoots and evaluate spacing.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #064e3b, #047857){% endblock %}
+{% block cta_btn_bg %}#047857{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Greenhouse Automation Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #115e59 0%, #0d9488 50%, #14b8a6 100%){% endblock %}
+{% block badge_text %}● CLIMATE-CHAMBER AUTOMATION{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #ccfbf1, #99f6e4){% endblock %}
+{% block service_card_border %}1.5px solid #2dd4bf{% endblock %}
+{% block service_badge_color %}#0d9488{% endblock %}
+{% block service_title_color %}#0f766e{% endblock %}
+{% block service_time_color %}#115e59{% endblock %}
+{% block expected_response_bg %}#5eead4{% endblock %}
+
+{% block service_details %}
+<div style="background:#ccfbf1;border:1px solid #99f6e4;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#0f766e;margin:0 0 12px;">🌡️ Controlled Environment Agriculture (CEA)</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Our automated greenhouse controller manages climate profiles inside tunnel structures, auto-adjusting roof exhaust vents, fogger nozzles, shade curtains, and drip line feeds dynamically.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">💨 <strong>Ventilation Control:</strong> Roof vent actuators responding to heat spikes.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🌫️ <strong>Fogger Automation:</strong> Humidity monitoring to optimize transpiration.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">☀️ <strong>Lux Sensors:</strong> Retract shading curtains based on solar lux density.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#ccfbf1;border:2px solid #2dd4bf;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#0d9488;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Structure Audit</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">We examine your structural frame dimensions, electric lines, and current water lines.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#ccfbf1;border:2px solid #2dd4bf;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#0d9488;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Hardware Wiring</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Install Actuator relays, Temp/RH sensor pods, and our AgroTech Automation Control Box.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#ccfbf1;border:2px solid #2dd4bf;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#0d9488;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Calibrate Target Profiles</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Program crop targets (e.g. Tomatoes: Max 28°C / RH 65%) on your controller console.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #115e59, #0d9488){% endblock %}
+{% block cta_btn_bg %}#0d9488{% endblock %}

@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Livestock Monitoring Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #065f46 0%, #059669 50%, #10b981 100%){% endblock %}
+{% block badge_text %}● SMART LIVESTOCK CARE{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1570042225831-d98fa7577f1e?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #ecfdf5, #d1fae5){% endblock %}
+{% block service_card_border %}1.5px solid #6ee7b7{% endblock %}
+{% block service_badge_color %}#059669{% endblock %}
+{% block service_title_color %}#065f46{% endblock %}
+{% block service_time_color %}#064e3b{% endblock %}
+{% block expected_response_bg %}#a7f3d0{% endblock %}
+
+{% block service_details %}
+<div style="background:#ecfdf5;border:1px solid #d1fae5;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#065f46;margin:0 0 12px;">🐄 IoT Smart Collar Livestock Telemetry</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Our dynamic livestock collars trace dairy cow and cattle locations, body temperatures, rumination rates, and physical activity indices to identify illnesses and heat cycles instantly.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🛰️ <strong>GPS Geo-Fencing:</strong> Real-time herd boundary mapping.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🌡️ <strong>Thermal Alerts:</strong> Spot early signs of mastitis or fever spikes.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🥛 <strong>Dairy Yield Maximizer:</strong> Monitor activity levels to optimize feed ratios.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#059669;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Gateway Node Pairing</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">We install a central LoRaWAN gateway receiver at your farm with a 5km radius scope.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#059669;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Collar Deployment</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Collar tags are fitted securely onto livestock, registering each tag ID on your app portal.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#ecfdf5;border:2px solid #6ee7b7;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#059669;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Virtual Boundary Map</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Draw grazing zones on the digital map to receive alerts if an animal strays too far.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #065f46, #059669){% endblock %}
+{% block cta_btn_bg %}#059669{% endblock %}

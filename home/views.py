@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.core.mail import send_mail, EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.template import TemplateDoesNotExist
+from django.utils.text import slugify
 from django.conf import settings
 from django.db import IntegrityError
 from django_ratelimit.decorators import ratelimit
@@ -282,11 +284,23 @@ def service_booking(request):
             # 2. Send rich HTML confirmation email to the user (customer)
             helpline = getattr(settings, 'AGROTECH_HELPLINE', '+91 9318302850')
             subject = f"🌱 AgroTech Callback Request Confirmed: {service_name}"
-            html_content = render_to_string('emails/service_booking_email.html', {
-                'user_name': name,
-                'service_name': service_name,
-                'helpline_number': helpline,
-            })
+            
+            # Dynamically resolve service-specific email template
+            service_slug = slugify(service_name).replace('-', '_')
+            template_name = f"emails/services/{service_slug}.html"
+            
+            try:
+                html_content = render_to_string(template_name, {
+                    'user_name': name,
+                    'service_name': service_name,
+                    'helpline_number': helpline,
+                })
+            except TemplateDoesNotExist:
+                html_content = render_to_string('emails/service_booking_email.html', {
+                    'user_name': name,
+                    'service_name': service_name,
+                    'helpline_number': helpline,
+                })
             
             try:
                 msg = EmailMultiAlternatives(
@@ -383,6 +397,25 @@ def registration(request):
             try:
                 user = User.objects.create_user(username=username, email=email, password=password)
                 UserProfile.objects.get_or_create(user=user)
+                
+                # Send welcome email containing credentials
+                try:
+                    subject = "Welcome to AgroTech! 🌿"
+                    html_welcome = render_to_string('emails/welcome_email.html', {
+                        'username': username,
+                        'password': password,
+                    })
+                    msg = EmailMultiAlternatives(
+                        subject=subject,
+                        body=f"Welcome to AgroTech, {username}! Your account has been created. Username: {username}, Password: {password}",
+                        from_email=settings.DEFAULT_FROM_EMAIL or 'support@agrotech.com',
+                        to=[email]
+                    )
+                    msg.attach_alternative(html_welcome, "text/html")
+                    msg.send(fail_silently=True)
+                except Exception as e:
+                    logger.warning("Failed to send welcome email to %s: %s", email, e)
+                
                 messages.success(request, "Registration successful! You can now log in.")
                 return redirect('login')
             except IntegrityError:

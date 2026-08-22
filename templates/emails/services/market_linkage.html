@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Market Linkage Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #15803d 0%, #166534 50%, #14532d 100%){% endblock %}
+{% block badge_text %}● DIRECT MARKET LINKAGE{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #f0fdf4, #dcfce7){% endblock %}
+{% block service_card_border %}1.5px solid #86efac{% endblock %}
+{% block service_badge_color %}#15803d{% endblock %}
+{% block service_title_color %}#166534{% endblock %}
+{% block service_time_color %}#14532d{% endblock %}
+{% block expected_response_bg %}#bbf7d0{% endblock %}
+
+{% block service_details %}
+<div style="background:#f0fdf4;border:1px solid #dcfce7;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#166534;margin:0 0 12px;">🌾 Zero-Middlemen Direct Market Distribution</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    We bypass intermediary loops to connect your farm produce directly with institutional buyers, retail chains, and wholesale depots. Ensure you get fair MSP-aligned returns on every harvest.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">💰 <strong>Fair MSP Bids:</strong> Access real-time wholesale buyer bids.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🤝 <strong>Contract Pricing:</strong> Establish locked price deals before harvest starts.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🚚 <strong>Depot Logistics:</strong> Automated transport connection to buyer warehouses.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f0fdf4;border:2px solid #86efac;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#15803d;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Harvest Profile Creation</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Submit details regarding crop variety, tonnage estimates, and expected harvest dates.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f0fdf4;border:2px solid #86efac;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#15803d;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Buyer Matchmaking</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Our platform matches your lot to institutional buyers. You choose the best price bid.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f0fdf4;border:2px solid #86efac;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#15803d;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Logistics &amp; Payout</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Secure transport pickup logs and receive instant online bank transfer payouts upon delivery.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #15803d, #166534){% endblock %}
+{% block cta_btn_bg %}#15803d{% endblock %}

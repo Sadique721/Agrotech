@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Farm Software Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%){% endblock %}
+{% block badge_text %}● DIGITAL FARM MANAGEMENT SOFTWARE{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #eff6ff, #dbeafe){% endblock %}
+{% block service_card_border %}1.5px solid #bfdbfe{% endblock %}
+{% block service_badge_color %}#2563eb{% endblock %}
+{% block service_title_color %}#1e40af{% endblock %}
+{% block service_time_color %}#1e3a8a{% endblock %}
+{% block expected_response_bg %}#93c5fd{% endblock %}
+
+{% block service_details %}
+<div style="background:#eff6ff;border:1px solid #dbeafe;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#1e40af;margin:0 0 12px;">📊 Complete Digital Farm ERP &amp; Analytics</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Our comprehensive SaaS farm management platform enables tracking worker schedules, crop inventories, seed/fertilizer stock records, and day-to-day transaction ledger balances.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">💼 <strong>Financial Ledger:</strong> Monitor direct crop production costs and revenues.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">📦 <strong>Inventory Control:</strong> Automatic alerts when seed or chemical reserves run low.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">👥 <strong>Crew Management:</strong> Assign task logs to field workers and trace completion times.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#eff6ff;border:2px solid #bfdbfe;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#2563eb;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Account Onboarding</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Our product specialist configures your dashboard and outlines custom metric setups.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#eff6ff;border:2px solid #bfdbfe;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#2563eb;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Inventory Import</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">We assist in importing worker records, existing stocks, and historical yield details.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#eff6ff;border:2px solid #bfdbfe;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#2563eb;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Worker App Launch</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Launch worker app nodes so field crews can log field actions directly from their phones.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #1e3a8a, #2563eb){% endblock %}
+{% block cta_btn_bg %}#2563eb{% endblock %}

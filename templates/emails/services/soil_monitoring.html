@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Soil Monitoring Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #4f772d 0%, #31572c 50%, #132a13 100%){% endblock %}
+{% block badge_text %}● SOIL HEALTH MONITORING{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #f1f8e9, #dcedc8){% endblock %}
+{% block service_card_border %}1.5px solid #8ebd60{% endblock %}
+{% block service_badge_color %}#33691e{% endblock %}
+{% block service_title_color %}#1b5e20{% endblock %}
+{% block service_time_color %}#003300{% endblock %}
+{% block expected_response_bg %}#a5d6a7{% endblock %}
+
+{% block service_details %}
+<div style="background:#f1f8e9;border:1px solid #dcedc8;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#33691e;margin:0 0 12px;">🧪 Precision Soil Chemistry Analytics</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Our IoT soil sensor networks analyze macronutrient concentrations (Nitrogen, Phosphorus, Potassium), pH levels, electrical conductivity, and temperature to maximize fertilizer efficiency.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🔬 <strong>NPK Telemetry:</strong> Precise nutrient tracking.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">📈 <strong>pH Health:</strong> Guard against soil acidity or alkalinity.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🚜 <strong>Precision Fertigation:</strong> Stop wasting expensive fertilizers.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f1f8e9;border:2px solid #8ebd60;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#33691e;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Core Sampling</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">An agronomist takes initial deep core soil samples to calibrate the sensor baseline.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f1f8e9;border:2px solid #8ebd60;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#33691e;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Node Installation</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">We insert digital multispectral probes directly into key fields to upload live soil metrics.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f1f8e9;border:2px solid #8ebd60;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#33691e;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Live Advisories</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Receive automated SMS and email alerts with exact NPK mix recommendations for your crops.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #31572c, #132a13){% endblock %}
+{% block cta_btn_bg %}#31572c{% endblock %}

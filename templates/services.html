@@ -217,11 +217,22 @@
             <form id="ajaxBookingForm" method="POST" action="{% url 'service_booking' %}">
                 {% csrf_token %}
                 <input type="hidden" name="service_name" id="modalServiceMsg" value="Service Request">
-                <div class="modal-form-grid">
-                    <input type="text" name="name" placeholder="Your Name" required>
-                    <input type="email" name="email" placeholder="Your Email" required>
-                </div>
-                <button type="submit" id="btnSubmitBooking" class="btn-submit-booking">Request Service Callback</button>
+                
+                {% if user.is_authenticated %}
+                    <input type="hidden" name="name" value="{{ user.get_full_name|default:user.username }}">
+                    <input type="hidden" name="email" value="{{ user.email }}">
+                    <p style="margin-bottom: 15px; font-size: 15px; color: #2d6a4f; text-align: center;">
+                        Booking callback as <strong>{{ user.get_full_name|default:user.username }}</strong> ({{ user.email }})
+                    </p>
+                    <button type="submit" id="btnSubmitBooking" class="btn-submit-booking" style="background-color: #2d6a4f;">Request Instant Callback</button>
+                {% else %}
+                    <div class="modal-form-grid">
+                        <input type="text" name="name" placeholder="Your Name" required>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <button type="submit" id="btnSubmitBooking" class="btn-submit-booking">Request Service Callback</button>
+                {% endif %}
+                
                 <div id="bookingStatus" style="margin-top: 12px; padding: 10px; border-radius: 6px; font-weight: bold; text-align: center; display: none;"></div>
             </form>
         </div>

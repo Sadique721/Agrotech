@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Supply Chain Management Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #1b4332 0%, #1e3f20 50%, #2f5233 100%){% endblock %}
+{% block badge_text %}● LOGISTICS &amp; COLD SUPPLY CHAIN{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #f0fdf4, #dcfce7){% endblock %}
+{% block service_card_border %}1.5px solid #86efac{% endblock %}
+{% block service_badge_color %}#16a34a{% endblock %}
+{% block service_title_color %}#14532d{% endblock %}
+{% block service_time_color %}#166534{% endblock %}
+{% block expected_response_bg %}#bbf7d0{% endblock %}
+
+{% block service_details %}
+<div style="background:#f0fdf4;border:1px solid #dcfce7;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#14532d;margin:0 0 12px;">🚚 Cold Chain Traceability &amp; Delivery Tracking</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Minimize post-harvest waste with our cold storage tracking nodes, dynamic transit route planning, and batch tracing. We keep you updated at every transport milestone.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">❄️ <strong>Cold Chain Tracing:</strong> Continuous temperature sensor feeds inside transit.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">📦 <strong>Smart Batch Tagging:</strong> Barcode generation for direct trace maps.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">📊 <strong>Market Dispatch Log:</strong> Direct integration with wholesale buyer networks.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f0fdf4;border:2px solid #86efac;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#16a34a;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Dispatch Setup</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Define your produce volume, destination markets, and target dispatch dates.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f0fdf4;border:2px solid #86efac;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#16a34a;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Cold-Node Integration</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Deploy transport telemetry nodes inside logistics vehicles to prevent crop spoilage.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#f0fdf4;border:2px solid #86efac;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#16a34a;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Delivery Milestone Confirm</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Verify weight, quality grades, and final direct transactions at destination depots.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #1b4332, #1e3f20){% endblock %}
+{% block cta_btn_bg %}#16a34a{% endblock %}

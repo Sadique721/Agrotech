@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}AgroTech — Service Callback Confirmed{% endblock %}</title>
+</head>
+<body style="margin:0;padding:0;background-color:#eef7f1;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#eef7f1;padding:30px 0;">
+<tr><td align="center">
+<table border="0" cellpadding="0" cellspacing="0" width="620" style="max-width:620px;background:#ffffff;border-radius:20px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.12);">
+
+  <!-- ======= TOP HEADER STRIPE ======= -->
+  <tr>
+    <td style="background:{% block header_gradient %}linear-gradient(135deg,#1b4332 0%,#2d6a4f 50%,#40916c 100%){% endblock %};padding:0 0 0 0;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="padding:28px 35px 20px;">
+            <div style="display:inline-block;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:30px;padding:5px 16px;font-size:11px;color:#b7e4c7;font-weight:600;letter-spacing:1px;text-transform:uppercase;">
+              {% block badge_text %}● LIVE CONFIRMATION{% endblock %}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 35px 10px;text-align:center;">
+            <div style="font-size:36px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">🌿 AgroTech</div>
+            <div style="font-size:14px;color:#b7e4c7;margin-top:4px;letter-spacing:0.5px;">SMART AGRICULTURE &amp; ENTERPRISE FARMING</div>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:0 35px 28px;text-align:center;">
+            <div style="display:inline-block;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);border-radius:50px;padding:8px 22px;font-size:12px;color:#d8f3dc;font-weight:500;">Begusarai, Bihar — Serving all 28 States of India</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======= HERO BANNER IMAGE ======= -->
+  <tr>
+    <td style="padding:0;line-height:0;">
+      <img src="{% block hero_image_url %}https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=1200&q=85{% endblock %}" alt="AgroTech Smart Farming" style="width:100%;height:200px;object-fit:cover;display:block;" />
+    </td>
+  </tr>
+
+  <!-- ======= GREETING & SERVICE CARD ======= -->
+  <tr>
+    <td style="padding:38px 35px 0;">
+      <h2 style="color:#1b4332;font-size:24px;font-weight:700;margin:0 0 8px;">Namaste, {{ user_name }}! 🙏</h2>
+      <p style="font-size:15px;color:#444;line-height:1.7;margin:0 0 24px;">
+        {% block greeting_text %}Thank you for trusting <strong>AgroTech Innovations</strong>. We've received your service request and our expert team is already on it. Here's a summary of your booking:{% endblock %}
+      </p>
+
+      <!-- Service Confirmed Card -->
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:{% block service_card_gradient %}linear-gradient(135deg,#f0fdf4,#dcfce7){% endblock %};border:{% block service_card_border %}1.5px solid #86efac{% endblock %};border-radius:14px;margin-bottom:28px;">
+        <tr>
+          <td style="padding:20px 24px;">
+            <div style="font-size:11px;color:{% block service_badge_color %}#16a34a{% endblock %};font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">✅ Service Confirmed</div>
+            <div style="font-size:20px;font-weight:700;color:{% block service_title_color %}#14532d{% endblock %};">{{ service_name }}</div>
+            <div style="margin-top:10px;font-size:13px;color:{% block service_time_color %}#166534{% endblock %};display:flex;align-items:center;gap:6px;">
+              <span>📅 Expected Response:</span>
+              <strong style="background:{% block expected_response_bg %}#bbf7d0{% endblock %};padding:2px 10px;border-radius:20px;">{% block expected_response_text %}Within 2–4 Business Hours{% endblock %}</strong>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Service Specific Details -->
+      {% block service_details %}
+      <div style="background:#f8fcf9;border:1px solid #d1fae5;border-radius:14px;padding:20px;margin-bottom:28px;">
+        <h3 style="font-size:16px;font-weight:700;color:#1b4332;margin:0 0 10px;">🌾 Service Benefits &amp; Overview</h3>
+        <p style="font-size:14px;color:#555;line-height:1.6;margin:0;">
+          Deploying state-of-the-art agricultural workflows dynamically tuned to Indian smallholder profiles. Helps maximize crop yields, reduce input cost, and improve overall field viability.
+        </p>
+      </div>
+      {% endblock %}
+
+      <!-- What Happens Next Timeline -->
+      <h3 style="font-size:16px;font-weight:700;color:#1b4332;margin:0 0 16px;">📋 What Happens Next?</h3>
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:32px;">
+        {% block timeline_steps %}
+        <tr>
+          <td style="padding:10px 0;border-bottom:1px solid #f0f0f0;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="42" style="vertical-align:top;padding-right:14px;">
+                  <div style="width:36px;height:36px;background:#dcfce7;border:2px solid #4ade80;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#1b4332;font-weight:bold;">1</div>
+                </td>
+                <td style="vertical-align:middle;">
+                  <strong style="font-size:14px;color:#1b4332;">Request Review</strong>
+                  <p style="margin:2px 0 0;font-size:13px;color:#666;">Our agronomist team reviews your request immediately.</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:10px 0;border-bottom:1px solid #f0f0f0;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="42" style="vertical-align:top;padding-right:14px;">
+                  <div style="width:36px;height:36px;background:#dcfce7;border:2px solid #4ade80;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#1b4332;font-weight:bold;">2</div>
+                </td>
+                <td style="vertical-align:middle;">
+                  <strong style="font-size:14px;color:#1b4332;">Direct Contact</strong>
+                  <p style="margin:2px 0 0;font-size:13px;color:#666;">Our specialist will call or email you to understand your requirements.</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:10px 0;">
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="42" style="vertical-align:top;padding-right:14px;">
+                  <div style="width:36px;height:36px;background:#dcfce7;border:2px solid #4ade80;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#1b4332;font-weight:bold;">3</div>
+                </td>
+                <td style="vertical-align:middle;">
+                  <strong style="font-size:14px;color:#1b4332;">Onboarding &amp; Deployment</strong>
+                  <p style="margin:2px 0 0;font-size:13px;color:#666;">We deploy your requested solution and provide hands-on training.</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        {% endblock %}
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======= PLATFORM FEATURES SECTION ======= -->
+  <tr>
+    <td style="padding:0 35px 28px;">
+      <div style="background:#f8fcf9;border:1px solid #d1fae5;border-radius:14px;padding:24px;">
+        <h3 style="font-size:16px;font-weight:700;color:#1b4332;margin:0 0 18px;text-align:center;">🌟 AgroTech Platform — What You Get</h3>
+        <table width="100%" cellpadding="0" cellspacing="0" border="0">
+          <tr>
+            <td width="50%" style="padding:0 8px 14px 0;vertical-align:top;">
+              <div style="background:#fff;border:1px solid #e0f2e9;border-radius:10px;padding:14px;">
+                <div style="font-size:20px;margin-bottom:6px;">🌤️</div>
+                <div style="font-size:13px;font-weight:700;color:#1b4332;">Live Weather Engine</div>
+                <div style="font-size:12px;color:#666;margin-top:3px;">UV Index, AQI, 7-day forecast, crop advisories.</div>
+              </div>
+            </td>
+            <td width="50%" style="padding:0 0 14px 8px;vertical-align:top;">
+              <div style="background:#fff;border:1px solid #e0f2e9;border-radius:10px;padding:14px;">
+                <div style="font-size:20px;margin-bottom:6px;">☁️</div>
+                <div style="font-size:13px;font-weight:700;color:#1b4332;">Cloud Media Storage</div>
+                <div style="font-size:12px;color:#666;margin-top:3px;">All assets on Cloudinary CDN — fast &amp; reliable.</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%" style="padding:0 8px 14px 0;vertical-align:top;">
+              <div style="background:#fff;border:1px solid #e0f2e9;border-radius:10px;padding:14px;">
+                <div style="font-size:20px;margin-bottom:6px;">🌱</div>
+                <div style="font-size:13px;font-weight:700;color:#1b4332;">Smart IoT Diagnostics</div>
+                <div style="font-size:12px;color:#666;margin-top:3px;">Soil sensors, drone surveillance, auto irrigation.</div>
+              </div>
+            </td>
+            <td width="50%" style="padding:0 0 14px 8px;vertical-align:top;">
+              <div style="background:#fff;border:1px solid #e0f2e9;border-radius:10px;padding:14px;">
+                <div style="font-size:20px;margin-bottom:6px;">💰</div>
+                <div style="font-size:13px;font-weight:700;color:#1b4332;">Direct Market Linkage</div>
+                <div style="font-size:12px;color:#666;margin-top:3px;">Zero middlemen, fair MSP, direct buyer connect.</div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td width="50%" style="padding:0 8px 0 0;vertical-align:top;">
+              <div style="background:#fff;border:1px solid #e0f2e9;border-radius:10px;padding:14px;">
+                <div style="font-size:20px;margin-bottom:6px;">🚁</div>
+                <div style="font-size:13px;font-weight:700;color:#1b4332;">Drone Field Services</div>
+                <div style="font-size:12px;color:#666;margin-top:3px;">Aerial crop health mapping, precision spraying.</div>
+              </div>
+            </td>
+            <td width="50%" style="padding:0 0 0 8px;vertical-align:top;">
+              <div style="background:#fff;border:1px solid #e0f2e9;border-radius:10px;padding:14px;">
+                <div style="font-size:20px;margin-bottom:6px;">🤖</div>
+                <div style="font-size:13px;font-weight:700;color:#1b4332;">AI &amp; ML Advisory</div>
+                <div style="font-size:12px;color:#666;margin-top:3px;">Yield prediction, disease detection, pest alerts.</div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </td>
+  </tr>
+
+  <!-- ======= KEY STATS ROW ======= -->
+  <tr>
+    <td style="padding:0 35px 28px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:{% block stats_gradient %}linear-gradient(135deg,#1b4332,#2d6a4f){% endblock %};border-radius:14px;">
+        <tr>
+          <td style="padding:22px 0;text-align:center;" width="25%">
+            <div style="font-size:22px;font-weight:800;color:#ffffff;">1.5L+</div>
+            <div style="font-size:11px;color:#b7e4c7;margin-top:3px;">Farmers Served</div>
+          </td>
+          <td style="padding:22px 0;text-align:center;border-left:1px solid rgba(255,255,255,0.15);" width="25%">
+            <div style="font-size:22px;font-weight:800;color:#ffffff;">28</div>
+            <div style="font-size:11px;color:#b7e4c7;margin-top:3px;">States</div>
+          </td>
+          <td style="padding:22px 0;text-align:center;border-left:1px solid rgba(255,255,255,0.15);" width="25%">
+            <div style="font-size:22px;font-weight:800;color:#ffffff;">24/7</div>
+            <div style="font-size:11px;color:#b7e4c7;margin-top:3px;">Expert Support</div>
+          </td>
+          <td style="padding:22px 0;text-align:center;border-left:1px solid rgba(255,255,255,0.15);" width="25%">
+            <div style="font-size:22px;font-weight:800;color:#ffffff;">15+</div>
+            <div style="font-size:11px;color:#b7e4c7;margin-top:3px;">AI Services</div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======= HELPLINE + CTA ======= -->
+  <tr>
+    <td style="padding:0 35px 30px;">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td style="padding:0 8px 0 0;" width="50%">
+            <div style="background:#f0fdf4;border:1.5px dashed #4ade80;border-radius:12px;padding:16px;text-align:center;">
+              <div style="font-size:20px;">📞</div>
+              <div style="font-size:13px;font-weight:700;color:#1b4332;margin-top:4px;">Kisan Helpline</div>
+              <div style="font-size:14px;font-weight:800;color:#16a34a;margin-top:2px;">{{ helpline_number }}</div>
+            </div>
+          </td>
+          <td style="padding:0 0 0 8px;" width="50%">
+            <div style="text-align:center;background:#1b4332;border-radius:12px;padding:16px;">
+              <div style="font-size:13px;font-weight:700;color:#b7e4c7;">Visit Our Platform</div>
+              <a href="https://agrotech-wqj3.onrender.com" style="display:inline-block;margin-top:8px;background:{% block cta_btn_bg %}#52b788{% endblock %};color:#fff;text-decoration:none;font-size:13px;font-weight:700;padding:8px 20px;border-radius:20px;">🌐 Open AgroTech</a>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <!-- ======= FOOTER ======= -->
+  <tr>
+    <td style="background:#111827;padding:24px 35px;border-radius:0 0 20px 20px;">
+      <p style="margin:0 0 8px;font-size:14px;font-weight:700;color:#ffffff;text-align:center;">AgroTech Innovations Pvt. Ltd.</p>
+      <p style="margin:0 0 6px;font-size:12px;color:#9ca3af;text-align:center;">Begusarai, Bihar — 851101, India</p>
+      <p style="margin:0 0 12px;font-size:12px;color:#9ca3af;text-align:center;">
+        <a href="https://github.com/Sadique721/Agrotech" style="color:#52b788;text-decoration:none;">GitHub</a>
+        &nbsp;|&nbsp;
+        <a href="https://agrotech-wqj3.onrender.com/contact/" style="color:#52b788;text-decoration:none;">Contact Us</a>
+        &nbsp;|&nbsp;
+        <a href="https://agrotech-wqj3.onrender.com/privacy/" style="color:#52b788;text-decoration:none;">Privacy Policy</a>
+      </p>
+      <p style="margin:0;font-size:11px;color:#6b7280;text-align:center;">Made with ❤️ for Farmers across Bihar &amp; India &nbsp;•&nbsp; © 2026 AgroTech</p>
+      <p style="margin:8px 0 0;font-size:10px;color:#4b5563;text-align:center;">You received this email because you requested a callback on AgroTech. Do not reply to this email.</p>
+    </td>
+  </tr>
+
+</table>
+</td></tr>
+</table>
+</body>
+</html>

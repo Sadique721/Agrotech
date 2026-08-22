@@ -1,0 +1,85 @@
+{% extends 'emails/base_email.html' %}
+
+{% block title %}AgroTech — Agri-Financial Services Confirmed{% endblock %}
+
+{% block header_gradient %}linear-gradient(135deg, #d97706 0%, #b45309 50%, #9a3412 100%){% endblock %}
+{% block badge_text %}● KISAN LOANS &amp; CROP INSURANCE{% endblock %}
+{% block hero_image_url %}https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=1200&q=85{% endblock %}
+
+{% block service_card_gradient %}linear-gradient(135deg, #fffbeb, #fef3c7){% endblock %}
+{% block service_card_border %}1.5px solid #fcd34d{% endblock %}
+{% block service_badge_color %}#d97706{% endblock %}
+{% block service_title_color %}#b45309{% endblock %}
+{% block service_time_color %}#78350f{% endblock %}
+{% block expected_response_bg %}#fde68a{% endblock %}
+
+{% block service_details %}
+<div style="background:#fffbeb;border:1px solid #fef3c7;border-radius:14px;padding:24px;margin-bottom:28px;">
+  <h3 style="font-size:17px;font-weight:700;color:#b45309;margin:0 0 12px;">💰 Kisan Credit, Micro-Loans, &amp; Insurance</h3>
+  <p style="font-size:14px;color:#334155;line-height:1.7;margin:0 0 16px;">
+    Our financial network assists farmers in obtaining low-interest agricultural loans, registering for government crop subsidies, and setting up insurance parameters to guard against weather anomalies.
+  </p>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">💳 <strong>KCC Loans:</strong> Guidance to unlock low-interest Kisan Credit Cards.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">🛡️ <strong>Crop Insurance:</strong> Protect investment against drought or excess rainfall.</td>
+    </tr>
+    <tr>
+      <td style="padding:4px 0;font-size:13px;color:#475569;">📈 <strong>Subsidies Check:</strong> Match your profile to active state funding grants.</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block timeline_steps %}
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#fffbeb;border:2px solid #fcd34d;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#d97706;font-weight:bold;">1</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Document Checklist review</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Our officer checks your land registries (Jamabandi/Khatian) and ID records.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;border-bottom:1px solid #e2e8f0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#fffbeb;border:2px solid #fcd34d;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#d97706;font-weight:bold;">2</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Partner Bank Pitching</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">We match and pitch your loan profiles to partner banks offering optimal MSP-aligned rates.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+  <td style="padding:10px 0;">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+      <tr>
+        <td width="42" style="vertical-align:top;padding-right:14px;">
+          <div style="width:36px;height:36px;background:#fffbeb;border:2px solid #fcd34d;border-radius:50%;text-align:center;line-height:32px;font-size:15px;color:#d97706;font-weight:bold;">3</div>
+        </td>
+        <td style="vertical-align:middle;">
+          <strong style="font-size:14px;color:#0f172a;">Credit Disbursal</strong>
+          <p style="margin:2px 0 0;font-size:13px;color:#475569;">Upon bank approval, the credits are disbursed directly to your registered bank account.</p>
+        </td>
+      </tr>
+    </table>
+  </td>
+</tr>
+{% endblock %}
+
+{% block stats_gradient %}linear-gradient(135deg, #d97706, #b45309){% endblock %}
+{% block cta_btn_bg %}#d97706{% endblock %}
