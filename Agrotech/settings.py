@@ -30,6 +30,11 @@ ALLOWED_HOSTS = list(config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast
 if '.onrender.com' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('.onrender.com')
 
+# Trust Render domains for secure CSRF validation over HTTPS
+CSRF_TRUSTED_ORIGINS = list(config('CSRF_TRUSTED_ORIGINS', default='https://*.onrender.com', cast=Csv()))
+if 'https://*.onrender.com' not in CSRF_TRUSTED_ORIGINS:
+    CSRF_TRUSTED_ORIGINS.append('https://*.onrender.com')
+
 # Enable Authentication Backend
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
