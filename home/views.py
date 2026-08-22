@@ -22,6 +22,38 @@ import datetime
 import logging
 
 logger = logging.getLogger(__name__)
+import threading
+
+
+def send_email_async(subject, body, to_email, html_content=None, from_email=None):
+    """Helper to send standard or HTML emails in a background thread."""
+    from_email = from_email or getattr(settings, 'DEFAULT_FROM_EMAIL', 'support@agrotech.com')
+    
+    def _send():
+        try:
+            if html_content:
+                msg = EmailMultiAlternatives(
+                    subject=subject,
+                    body=body,
+                    from_email=from_email,
+                    to=[to_email] if isinstance(to_email, str) else to_email
+                )
+                msg.attach_alternative(html_content, "text/html")
+                msg.send(fail_silently=False)
+            else:
+                send_mail(
+                    subject=subject,
+                    message=body,
+                    from_email=from_email,
+                    recipient_list=[to_email] if isinstance(to_email, str) else to_email,
+                    fail_silently=False
+                )
+        except Exception as e:
+            logger.warning("Async email sending failed: %s", e)
+
+    thread = threading.Thread(target=_send)
+    thread.daemon = True
+    thread.start()
 
 
 def ratelimited_error(request, exception):
@@ -302,30 +334,23 @@ def service_booking(request):
                     'helpline_number': helpline,
                 })
             
-            try:
-                msg = EmailMultiAlternatives(
-                    subject=subject,
-                    body=f"Namaste {name},\n\nThank you for requesting callback for {service_name}. Our AgroTech team will contact you shortly.\n\nHelpline: {helpline}",
-                    from_email=settings.DEFAULT_FROM_EMAIL or 'support@agrotech.com',
-                    to=[email]
-                )
-                msg.attach_alternative(html_content, "text/html")
-                msg.send(fail_silently=True)
-            except Exception as e:
-                logger.warning("Failed to send customer service booking email: %s", e)
+            # Send confirmation email to the user (customer) in the background
+            body_text = f"Namaste {name},\n\nThank you for requesting callback for {service_name}. Our AgroTech team will contact you shortly.\n\nHelpline: {helpline}"
+            send_email_async(
+                subject=subject,
+                body=body_text,
+                to_email=email,
+                html_content=html_content
+            )
 
-            # 3. Send notification to admin if configured
+            # 3. Send notification to admin if configured in the background
             if getattr(settings, 'ADMIN_NOTIFICATION_EMAIL', None):
-                try:
-                    send_mail(
-                        subject=f"New AgroTech Service Booking Request from {name}",
-                        message=f"Name: {name}\nEmail: {email}\nService Requested: {service_name}",
-                        from_email=settings.DEFAULT_FROM_EMAIL or 'support@agrotech.com',
-                        recipient_list=[settings.ADMIN_NOTIFICATION_EMAIL],
-                        fail_silently=True,
-                    )
-                except Exception as e:
-                    logger.warning("Failed to send admin booking notification email: %s", e)
+                admin_body = f"Name: {name}\nEmail: {email}\nService Requested: {service_name}"
+                send_email_async(
+                    subject=f"New AgroTech Service Booking Request from {name}",
+                    body=admin_body,
+                    to_email=settings.ADMIN_NOTIFICATION_EMAIL
+                )
 
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return JsonResponse({'status': 'ok', 'message': 'Callback request received successfully!'})
@@ -351,16 +376,12 @@ def contact(request):
         if name and email and msg:
             Contact.objects.create(name=name, email=email, msg=msg)
             if settings.ADMIN_NOTIFICATION_EMAIL:
-                try:
-                    send_mail(
-                        subject=f"New AgroTech contact message from {name}",
-                        message=f"From: {name} <{email}>\n\n{msg}",
-                        from_email=settings.DEFAULT_FROM_EMAIL,
-                        recipient_list=[settings.ADMIN_NOTIFICATION_EMAIL],
-                        fail_silently=True,
-                    )
-                except Exception as e:
-                    logger.warning("Failed to send contact notification email: %s", e)
+                admin_body = f"From: {name} <{email}>\n\n{msg}"
+                send_email_async(
+                    subject=f"New AgroTech contact message from {name}",
+                    body=admin_body,
+                    to_email=settings.ADMIN_NOTIFICATION_EMAIL
+                )
             messages.success(request, "Your message was successfully submitted!")
         else:
             messages.error(request, "All fields are required!")
@@ -398,23 +419,17 @@ def registration(request):
                 user = User.objects.create_user(username=username, email=email, password=password)
                 UserProfile.objects.get_or_create(user=user)
                 
-                # Send welcome email containing credentials
-                try:
-                    subject = "Welcome to AgroTech! 🌿"
-                    html_welcome = render_to_string('emails/welcome_email.html', {
-                        'username': username,
-                        'password': password,
-                    })
-                    msg = EmailMultiAlternatives(
-                        subject=subject,
-                        body=f"Welcome to AgroTech, {username}! Your account has been created. Username: {username}, Password: {password}",
-                        from_email=settings.DEFAULT_FROM_EMAIL or 'support@agrotech.com',
-                        to=[email]
-                    )
-                    msg.attach_alternative(html_welcome, "text/html")
-                    msg.send(fail_silently=True)
-                except Exception as e:
-                    logger.warning("Failed to send welcome email to %s: %s", email, e)
+                # Send welcome email containing credentials in the background
+                html_welcome = render_to_string('emails/welcome_email.html', {
+                    'username': username,
+                    'password': password,
+                })
+                send_email_async(
+                    subject="Welcome to AgroTech! 🌿",
+                    body=f"Welcome to AgroTech, {username}! Your account has been created. Username: {username}, Password: {password}",
+                    to_email=email,
+                    html_content=html_welcome
+                )
                 
                 messages.success(request, "Registration successful! You can now log in.")
                 return redirect('login')
