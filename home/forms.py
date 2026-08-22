@@ -43,10 +43,11 @@ class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(max_length=150, required=False, widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
     last_name = forms.CharField(max_length=150, required=False, widget=forms.TextInput(attrs={'placeholder': 'Last Name'}))
     email = forms.EmailField(required=False, widget=forms.EmailInput(attrs={'placeholder': 'Email Address'}))
+    profile_picture = forms.ImageField(required=False, widget=forms.FileInput(), validators=[validate_profile_image])
 
     class Meta:
         model = UserProfile
-        fields = ['phone', 'state', 'district', 'farm_size', 'primary_crops', 'experience_years', 'bio', 'avatar', 'profile_picture']
+        fields = ['phone', 'state', 'district', 'farm_size', 'primary_crops', 'experience_years', 'bio', 'avatar']
         widgets = {
             'phone': forms.TextInput(attrs={'placeholder': 'Mobile Number'}),
             'state': forms.TextInput(attrs={'placeholder': 'State / Region'}),
@@ -58,8 +59,3 @@ class UserProfileForm(forms.ModelForm):
             'avatar': forms.HiddenInput(),
         }
 
-    def clean_profile_picture(self):
-        profile_picture = self.cleaned_data.get('profile_picture')
-        if profile_picture:
-            validate_profile_image(profile_picture)
-        return profile_picture

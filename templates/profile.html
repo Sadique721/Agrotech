@@ -10,7 +10,7 @@
         <div class="profile-avatar-wrapper">
             <div class="avatar-ring">
                 {% if profile.profile_picture %}
-                    <img src="{{ profile.profile_picture.url }}" alt="{{ user.username }}'s Picture" class="custom-avatar-img">
+                    <img src="{{ profile.profile_picture }}" alt="{{ user.username }}'s Picture" class="custom-avatar-img">
                 {% else %}
                     {% if profile.avatar == 'farmer2' %}
                         <span class="avatar-emoji">👩‍🌾</span>
@@ -183,7 +183,7 @@
                     <div class="upload-box-wrapper">
                         <div class="preview-avatar-box">
                             {% if profile.profile_picture %}
-                                <img src="{{ profile.profile_picture.url }}" alt="Preview" id="imgPreview" class="photo-preview">
+                                <img src="{{ profile.profile_picture }}" alt="Preview" id="imgPreview" class="photo-preview">
                             {% else %}
                                 <div id="previewPlaceholder" class="preview-emoji">👨‍🌾</div>
                                 <img src="" alt="Preview" id="imgPreview" class="photo-preview" style="display:none;">
