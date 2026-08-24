@@ -33,7 +33,14 @@
                 <span class="verified-badge">✔ Verified Farmer</span>
                 <span class="membership-pill">⭐ AgroTech Pro Member</span>
             </div>
-            <p class="user-handle">@{{ user.username }} • {{ profile.district }}, {{ profile.state }}</p>
+            <p class="user-handle">
+                {% if user.username == 'admin' %}
+                    <span class="admin-badge-tag">@{{ user.username }}</span>
+                {% else %}
+                    <span class="user-badge-tag">@{{ user.username }}</span>
+                {% endif %}
+                • {{ profile.district }}, {{ profile.state }}
+            </p>
 
             <div class="meta-row">
                 <span>📅 Member Since: <strong>{{ user.date_joined|date:"M d, Y" }}</strong></span>
@@ -450,6 +457,37 @@
         color: #d8f3dc;
         font-size: 1.1rem;
         margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .admin-badge-tag {
+        background: linear-gradient(135deg, #d90429 0%, #ef233c 100%);
+        color: white !important;
+        font-weight: 800;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        border: 1.5px solid #ff4d6d;
+        box-shadow: 0 4px 12px rgba(217, 4, 41, 0.4);
+        display: inline-flex;
+        align-items: center;
+        letter-spacing: 0.5px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .user-badge-tag {
+        background: rgba(255, 255, 255, 0.15);
+        color: white !important;
+        font-weight: bold;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        display: inline-flex;
+        align-items: center;
     }
 
     .meta-row {

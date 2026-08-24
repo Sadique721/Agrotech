@@ -483,6 +483,69 @@
                 text-align: center;
             }
         }
+
+        /* Logo Area & Navigation Profile Badge */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .nav-profile-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 5px 14px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            transition: all 0.22s ease;
+            height: 36px;
+        }
+
+        .nav-profile-badge:hover {
+            background: rgba(255, 255, 255, 0.22);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-profile-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            display: block;
+        }
+
+        .nav-profile-emoji {
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+
+        .nav-profile-name {
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.4px;
+        }
+
+        @media (max-width: 580px) {
+            .nav-profile-name {
+                display: none; /* Hide name on small mobile viewports to avoid layout wrapping */
+            }
+            .logo-area {
+                gap: 8px;
+            }
+            .nav-profile-badge {
+                padding: 5px;
+                border-radius: 50%;
+                width: 36px;
+                justify-content: center;
+            }
+        }
     </style>
     {% block extra_css %}{% endblock %}
 </head>
@@ -490,7 +553,21 @@
     <!-- Header Section -->
     <header>
         <nav class="navbar">
-            <a href="{% url 'home' %}" class="logo">🌿 AgroTech</a>
+            <div class="logo-area">
+                <a href="{% url 'home' %}" class="logo">🌿 AgroTech</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'user_profile' %}" class="nav-profile-badge">
+                        {% if user.profile.profile_picture %}
+                            <img src="{{ user.profile.profile_picture }}" alt="{{ user.username }}" class="nav-profile-img">
+                        {% else %}
+                            <span class="nav-profile-emoji">👨‍🌾</span>
+                        {% endif %}
+                        <span class="nav-profile-name">
+                            {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}
+                        </span>
+                    </a>
+                {% endif %}
+            </div>
 
             <!-- Mobile Hamburger Button -->
             <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">&#9776;</button>
@@ -503,7 +580,6 @@
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'user_profile' %}" class="btn">👤 Profile</a></li>
                     <li><a href="{% url 'logout' %}" class="btn">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}" class="btn">Login</a></li>
