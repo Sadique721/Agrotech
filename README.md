@@ -215,6 +215,77 @@ Agrotech/
 └── README.md               # Project Documentation
 ```
 
+## 🌾 State Agronomy Data & Crop Imagery (STATE_CROP_INFO)
+
+The weather module parses dynamic state agronomy crop data and renders high-performance CDN crop images for all states:
+
+### State Crop Configuration (`STATE_CROP_INFO` mapping)
+```python
+STATE_CROP_INFO = {
+    "Gujarat":           {"icon": "🥜", "crop": "Groundnut", "img": "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=400&h=250&fit=crop&q=80"},
+    "Delhi":             {"icon": "🌾", "crop": "Wheat",     "img": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=250&fit=crop&q=80"},
+    "Maharashtra":       {"icon": "🎋", "crop": "Sugarcane", "img": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&h=250&fit=crop&q=80"},
+    "Punjab":            {"icon": "🌾", "crop": "Wheat",     "img": "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=250&fit=crop&q=80"},
+    "Uttar Pradesh":     {"icon": "🎋", "crop": "Sugarcane", "img": "https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&h=250&fit=crop&q=80"},
+    "Bihar":             {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+    "Rajasthan":         {"icon": "🌿", "crop": "Mustard",   "img": "https://images.unsplash.com/photo-1599930113854-d6d7fd521f10?w=400&h=250&fit=crop&q=80"},
+    "West Bengal":       {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+    "Madhya Pradesh":    {"icon": "🫘", "crop": "Soybean",   "img": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=250&fit=crop&q=80"},
+    "Tamil Nadu":        {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+    "Karnataka":         {"icon": "☕", "crop": "Coffee",    "img": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&h=250&fit=crop&q=80"},
+    "Kerala":            {"icon": "🌿", "crop": "Rubber",    "img": "https://images.unsplash.com/photo-1600718374662-0483d2b9da44?w=400&h=250&fit=crop&q=80"},
+    "Haryana":           {"icon": "🌾", "crop": "Basmati Rice", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+    "Andhra Pradesh":    {"icon": "🌶️", "crop": "Chilli",    "img": "https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=400&h=250&fit=crop&q=80"},
+    "Telangana":         {"icon": "🌿", "crop": "Cotton",    "img": "https://images.unsplash.com/photo-1594756202469-9ff9799b2e4e?w=400&h=250&fit=crop&q=80"},
+    "Assam":             {"icon": "🍵", "crop": "Tea",       "img": "https://images.unsplash.com/photo-1557800636-894a64c1696f?w=400&h=250&fit=crop&q=80"},
+    "Odisha":            {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+    "Himachal Pradesh":  {"icon": "🍎", "crop": "Apple",     "img": "https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?w=400&h=250&fit=crop&q=80"},
+    "Jammu & Kashmir":   {"icon": "🌸", "crop": "Saffron",   "img": "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=400&h=250&fit=crop&q=80"},
+    "Jharkhand":         {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+    "Uttarakhand":       {"icon": "🌾", "crop": "Basmati Rice", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+    "Chhattisgarh":      {"icon": "🌾", "crop": "Paddy (Rice)", "img": "https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80"},
+}
+```
+
+### Verified Unsplash Crop Images CDN
+- **Groundnut (peanut)**: `https://images.unsplash.com/photo-1568254183919-78a4f43a2877?w=400&h=250&fit=crop&q=80`
+- **Wheat**: `https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&h=250&fit=crop&q=80`
+- **Sugarcane**: `https://images.unsplash.com/photo-1593113598332-cd288d649433?w=400&h=250&fit=crop&q=80`
+- **Paddy (Rice)**: `https://images.unsplash.com/photo-1536657235019-0307116c19e0?w=400&h=250&fit=crop&q=80`
+- **Mustard**: `https://images.unsplash.com/photo-1599930113854-d6d7fd521f10?w=400&h=250&fit=crop&q=80`
+- **Soybean**: `https://images.unsplash.com/photo-1599599810769-bcde5a160d32?w=400&h=250&fit=crop&q=80`
+- **Coffee**: `https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=400&h=250&fit=crop&q=80`
+- **Rubber**: `https://images.unsplash.com/photo-1600718374662-0483d2b9da44?w=400&h=250&fit=crop&q=80`
+- **Chilli**: `https://images.unsplash.com/photo-1588252303782-cb80119abd6d?w=400&h=250&fit=crop&q=80`
+- **Cotton**: `https://images.unsplash.com/photo-1594756202469-9ff9799b2e4e?w=400&h=250&fit=crop&q=80`
+- **Tea**: `https://images.unsplash.com/photo-1557800636-894a64c1696f?w=400&h=250&fit=crop&q=80`
+- **Apple**: `https://images.unsplash.com/photo-1619546813926-a78fa6372cd2?w=400&h=250&fit=crop&q=80`
+- **Saffron**: `https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?w=400&h=250&fit=crop&q=80`
+
+### Indian States Covered & Crop Mapping
+- **Gujarat**: Groundnut
+- **Delhi**: Wheat
+- **Maharashtra**: Sugarcane
+- **Punjab**: Wheat
+- **Uttar Pradesh**: Sugarcane
+- **Bihar**: Paddy (Rice)
+- **Rajasthan**: Mustard
+- **West Bengal**: Paddy (Rice)
+- **Madhya Pradesh**: Soybean
+- **Tamil Nadu**: Paddy (Rice)
+- **Karnataka**: Coffee
+- **Kerala**: Rubber
+- **Haryana**: Basmati Rice (Paddy)
+- **Andhra Pradesh**: Chilli
+- **Telangana**: Cotton
+- **Assam**: Tea
+- **Odisha**: Paddy (Rice)
+- **Himachal Pradesh**: Apple
+- **Jammu & Kashmir**: Saffron
+- **Jharkhand**: Paddy (Rice)
+- **Uttarakhand**: Basmati Rice (Paddy)
+- **Chhattisgarh**: Paddy (Rice)
+
 ---
 
 ## 👤 Author & Credits
