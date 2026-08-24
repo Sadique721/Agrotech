@@ -229,27 +229,34 @@ LOGGING = {
 }
 
 # Email configurations
-BREVO_API_KEY = config('BREVO_API_KEY', default='')
+# -------------------------------------------------------------------
+# Render free tier SMTP block karta hai (ports 25/465/587).
+# HTTP API use karo — port 443 kabhi block nahi hota.
+# Priority: RESEND_API_KEY > BREVO_API_KEY > console fallback
+# -------------------------------------------------------------------
+RESEND_API_KEY = config('RESEND_API_KEY', default='')
+BREVO_API_KEY  = config('BREVO_API_KEY',  default='')
 
-if BREVO_API_KEY:
-    # Render free tier SMTP block karta hai (port 25/465/587).
-    # Brevo HTTP API port 443 use karta hai jo kabhi block nahi hota.
+if RESEND_API_KEY:
+    # Resend HTTP API — resend.com (3000 emails/month free)
+    EMAIL_BACKEND = 'anymail.backends.resend.EmailBackend'
+    ANYMAIL = {'RESEND_API_KEY': RESEND_API_KEY}
+elif BREVO_API_KEY:
+    # Brevo HTTP API — brevo.com (300 emails/day free)
     EMAIL_BACKEND = 'anymail.backends.brevo.EmailBackend'
-    ANYMAIL = {
-        'BREVO_API_KEY': BREVO_API_KEY
-    }
+    ANYMAIL = {'BREVO_API_KEY': BREVO_API_KEY}
 else:
-    # BREVO_API_KEY na ho toh purana SMTP fallback (local dev ke liye theek hai)
+    # Local dev fallback — console par email print hoga
     EMAIL_BACKEND = config('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
-    EMAIL_HOST = config('EMAIL_HOST', default='')
-    EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
-    EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-    EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+    EMAIL_HOST     = config('EMAIL_HOST',     default='')
+    EMAIL_PORT     = config('EMAIL_PORT',     default=587, cast=int)
+    EMAIL_USE_TLS  = config('EMAIL_USE_TLS',  default=True, cast=bool)
+    EMAIL_HOST_USER     = config('EMAIL_HOST_USER',     default='')
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=EMAIL_HOST_USER or 'no-reply@agrotech.com')
+DEFAULT_FROM_EMAIL       = config('DEFAULT_FROM_EMAIL',       default='no-reply@agrotech.com')
 ADMIN_NOTIFICATION_EMAIL = config('ADMIN_NOTIFICATION_EMAIL', default='')
-EMAIL_TIMEOUT = config('EMAIL_TIMEOUT', default=10, cast=int)
+EMAIL_TIMEOUT            = config('EMAIL_TIMEOUT',            default=10, cast=int)
 
 AGROTECH_HELPLINE = config('AGROTECH_HELPLINE', default='+91 9318302850')
 
