@@ -162,7 +162,7 @@
             <div class="card-header">
                 <h3>📝 Farmer Bio & Operating Summary</h3>
             </div>
-            <p class="bio-text">{{ profile.bio|default:"No bio provided yet." }}</p>
+            <div class="bio-text" id="bio-container">{{ profile.bio|default:"No bio provided yet." }}</div>
         </div>
     </div>
 
@@ -709,9 +709,84 @@
     }
 
     .bio-text {
-        color: #444;
-        line-height: 1.7;
-        font-size: 1.05rem;
+        color: #333;
+        line-height: 1.75;
+        font-size: 1.02rem;
+        background: #ffffff;
+        padding: 24px;
+        border-radius: 12px;
+        border: 1px solid #e2ece9;
+    }
+
+    .bio-section-title {
+        color: #1b4332;
+        font-size: 1.28rem;
+        font-weight: 800;
+        margin-top: 24px;
+        margin-bottom: 14px;
+        border-left: 5px solid #52b788;
+        padding-left: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .bio-section-title:first-of-type {
+        margin-top: 0;
+    }
+
+    .bio-paragraph {
+        margin: 10px 0;
+        color: #3f4e46;
+        text-align: justify;
+    }
+
+    .bio-bold {
+        color: #1b4332;
+        font-weight: 700;
+        background: #fdfaf6;
+        padding: 2px 6px;
+        border-radius: 4px;
+        border: 1px dashed #ffd166;
+    }
+
+    .bio-bullets-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 10px 18px;
+        margin: 18px 0;
+    }
+
+    .bio-bullet-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.96rem;
+        color: #1b4332;
+        background: #f4faf6;
+        padding: 8px 14px;
+        border-radius: 10px;
+        border: 1px solid #d8f3dc;
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .bio-bullet-item:hover {
+        transform: translateX(4px);
+        background: #e8f5ec;
+        border-color: #52b788;
+    }
+
+    .bio-bullet-icon {
+        color: #2d6a4f;
+        font-size: 1.1rem;
+    }
+
+    @media (max-width: 768px) {
+        .bio-bullets-grid {
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
     }
 
     /* Edit Form Styling */
@@ -872,5 +947,67 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
+
+    // Farmer Bio Styled Markdown Parser
+    document.addEventListener("DOMContentLoaded", function() {
+        const bioEl = document.getElementById("bio-container");
+        if (bioEl) {
+            let rawText = bioEl.textContent.trim();
+            if (!rawText || rawText === "No bio provided yet.") return;
+
+            // Normalize newlines
+            rawText = rawText.replace(/\r/g, "");
+
+            // 1. Process Headings: # Header
+            rawText = rawText.replace(/^#\s+(.*?)$/gm, '<h4 class="bio-section-title">$1</h4>');
+
+            // 2. Process Bold: **text**
+            rawText = rawText.replace(/\*\*(.*?)\*\*/g, '<strong class="bio-bold">$1</strong>');
+
+            // 3. Process Bullet points: * item or • item
+            rawText = rawText.replace(/^[\*•]\s+(.*?)$/gm, '<span class="bio-bullet-item"><span class="bio-bullet-icon">✦</span> $1</span>');
+
+            // 4. Line-by-line formatting
+            let lines = rawText.split("\n");
+            let formatted = [];
+            let inList = false;
+
+            for (let line of lines) {
+                let trimmed = line.trim();
+                if (!trimmed) continue;
+
+                if (trimmed.startsWith("<h4")) {
+                    if (inList) {
+                        formatted.push("</div>");
+                        inList = false;
+                    }
+                    formatted.push(trimmed);
+                } else if (trimmed.startsWith("<span class=\"bio-bullet-item\"")) {
+                    if (!inList) {
+                        formatted.push("<div class=\"bio-bullets-grid\">");
+                        inList = true;
+                    }
+                    formatted.push(trimmed);
+                } else {
+                    if (inList) {
+                        formatted.push("</div>");
+                        inList = false;
+                    }
+                    // If it is not already wrapped in p/div, wrap it
+                    if (!trimmed.startsWith("<p") && !trimmed.startsWith("<div")) {
+                        formatted.push(`<p class="bio-paragraph">${trimmed}</p>`);
+                    } else {
+                        formatted.push(trimmed);
+                    }
+                }
+            }
+
+            if (inList) {
+                formatted.push("</div>");
+            }
+
+            bioEl.innerHTML = formatted.join("\n");
+        }
+    });
 </script>
 {% endblock %}
