@@ -484,11 +484,10 @@
             }
         }
 
-        /* Logo Area & Navigation Profile Badge */
+        /* Navigation Profile Badge */
         .logo-area {
             display: flex;
             align-items: center;
-            gap: 16px;
         }
 
         .nav-profile-badge {
@@ -532,18 +531,40 @@
             letter-spacing: 0.4px;
         }
 
-        @media (max-width: 580px) {
+        @media (max-width: 991px) {
+            /* Collapse name to icon-only on medium desktop viewports to avoid wrapping */
             .nav-profile-name {
-                display: none; /* Hide name on small mobile viewports to avoid layout wrapping */
-            }
-            .logo-area {
-                gap: 8px;
+                display: none;
             }
             .nav-profile-badge {
                 padding: 5px;
                 border-radius: 50%;
                 width: 36px;
                 justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* In mobile navigation vertical dropdown drawer */
+            .nav-profile-name {
+                display: inline-block !important;
+                font-size: 0.95rem;
+                font-weight: bold;
+            }
+            .nav-profile-badge {
+                width: calc(100% - 30px) !important;
+                height: 42px !important;
+                border-radius: 8px !important;
+                padding: 8px 16px !important;
+                background: rgba(255, 255, 255, 0.08) !important;
+                border-color: rgba(255, 255, 255, 0.15) !important;
+                margin: 6px 15px !important;
+                justify-content: flex-start !important;
+                box-shadow: none !important;
+            }
+            .nav-profile-img {
+                width: 26px !important;
+                height: 26px !important;
             }
         }
     </style>
@@ -553,21 +574,7 @@
     <!-- Header Section -->
     <header>
         <nav class="navbar">
-            <div class="logo-area">
-                <a href="{% url 'home' %}" class="logo">🌿 AgroTech</a>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'user_profile' %}" class="nav-profile-badge">
-                        {% if user.profile.profile_picture %}
-                            <img src="{{ user.profile.profile_picture }}" alt="{{ user.username }}" class="nav-profile-img">
-                        {% else %}
-                            <span class="nav-profile-emoji">👨‍🌾</span>
-                        {% endif %}
-                        <span class="nav-profile-name">
-                            {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}
-                        </span>
-                    </a>
-                {% endif %}
-            </div>
+            <a href="{% url 'home' %}" class="logo">🌿 AgroTech</a>
 
             <!-- Mobile Hamburger Button -->
             <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle Navigation">&#9776;</button>
@@ -580,6 +587,18 @@
                 <li><a href="{% url 'contact' %}">Contact</a></li>
                 <li><a href="{% url 'about' %}">About</a></li>
                 {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'user_profile' %}" class="nav-profile-badge">
+                            {% if user.profile.profile_picture %}
+                                <img src="{{ user.profile.profile_picture }}" alt="{{ user.username }}" class="nav-profile-img">
+                            {% else %}
+                                <span class="nav-profile-emoji">👨‍🌾</span>
+                            {% endif %}
+                            <span class="nav-profile-name">
+                                {% if user.first_name %}{{ user.first_name }}{% else %}{{ user.username }}{% endif %}
+                            </span>
+                        </a>
+                    </li>
                     <li><a href="{% url 'logout' %}" class="btn">Logout</a></li>
                 {% else %}
                     <li><a href="{% url 'login' %}" class="btn">Login</a></li>
