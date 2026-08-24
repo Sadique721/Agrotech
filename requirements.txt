@@ -8,4 +8,4 @@ django-ratelimit==4.1.0
 mysqlclient==2.2.8
 cloudinary==1.41.0
 django-cloudinary-storage==0.3.0
-
+django-anymail==15.1
