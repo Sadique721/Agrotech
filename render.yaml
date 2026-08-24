@@ -12,7 +12,7 @@ services:
       - key: DEBUG
         value: "False"
       - key: ALLOWED_HOSTS
-        value: "agrotech-yzl4.onrender.com"
+        value: "agrotech-wqj3.onrender.com"
       # MySQL Database (Aiven)
       - key: DB_HOST
         sync: false

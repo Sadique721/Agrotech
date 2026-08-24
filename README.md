@@ -16,7 +16,7 @@
 </p>
 
 <p align="center">
-  <a href="https://agrotech-yzl4.onrender.com"><img src="https://img.shields.io/badge/Live%20Website-agrotech--yzl4.onrender.com-10b981?style=for-the-badge&logo=render&logoColor=white" alt="Live Website"></a>
+  <a href="https://agrotech-wqj3.onrender.com"><img src="https://img.shields.io/badge/Live%20Website-agrotech--wqj3.onrender.com-10b981?style=for-the-badge&logo=render&logoColor=white" alt="Live Website"></a>
   <a href="https://github.com/Sadique721/Agrotech"><img src="https://img.shields.io/badge/Python-3.12-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"></a>
   <a href="https://github.com/Sadique721/Agrotech"><img src="https://img.shields.io/badge/Django-5.1.5-092E20?style=for-the-badge&logo=django&logoColor=white" alt="Django"></a>
   <a href="https://open-meteo.com/"><img src="https://img.shields.io/badge/Live%20API-Open--Meteo%20Weather-0077B6?style=for-the-badge" alt="Open-Meteo API"></a>
