@@ -254,7 +254,7 @@ else:
     EMAIL_HOST_USER     = config('EMAIL_HOST_USER',     default='')
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 
-DEFAULT_FROM_EMAIL       = config('DEFAULT_FROM_EMAIL',       default='no-reply@agrotech.com')
+DEFAULT_FROM_EMAIL       = config('DEFAULT_FROM_EMAIL', default='onboarding@resend.dev')
 ADMIN_NOTIFICATION_EMAIL = config('ADMIN_NOTIFICATION_EMAIL', default='')
 EMAIL_TIMEOUT            = config('EMAIL_TIMEOUT',            default=10, cast=int)
 
