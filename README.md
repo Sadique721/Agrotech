@@ -32,6 +32,18 @@
 </tr>
 </table>
 
+<!-- ========== NEW: SYSTEM DIAGRAM SECTION ========== -->
+## 📊 System Architecture & Workflow
+
+```mermaid
+graph TD
+    A[IoT Farming Sensors] --> B[Agrotech Smart Gateway]
+    B --> C[Cloud Analytics Database]
+    C --> D[Machine Learning Prediction Model]
+    D --> E[Agricultural Yield Dashboard]
+    E --> F[Farmer Alert System]
+```
+
 ---
 
 <!-- ========== ANIMATED HEADER BANNER ========== -->
